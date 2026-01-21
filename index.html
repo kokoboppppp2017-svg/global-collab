@@ -1,723 +1,645 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dotorin | Global Collaboration Page</title>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dotorin | Global Collaboration Page</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 
-  <style>
-    :root{
-      --bg:#f5f7fb;
-      --card:#ffffff;
-      --text:#111827;
-      --sub:#6b7280;
-      --accent:#2563eb;
-      --line:#e5e7eb;
-      --shadow: 0 14px 40px rgba(17,24,39,.08);
-      --radius: 22px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:"Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-      background:var(--bg);
-      color:var(--text);
-    }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1200px;margin:0 auto;padding:20px}
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#111827;
+      --sub:#6b7280;
+      --accent:#2563eb;
+      --line:#e5e7eb;
+      --shadow: 0 14px 40px rgba(17,24,39,.08);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+      background:var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1200px;margin:0 auto;padding:20px}
 
-    header{
-      background:#fff;
-      border-bottom:1px solid var(--line);
-      position:sticky;top:0;z-index:50;
-      backdrop-filter:saturate(180%) blur(10px);
-    }
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
-    }
-    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
-    .brand-dot{
-      width:10px;height:10px;border-radius:999px;background:var(--accent);
-      box-shadow:0 0 0 5px rgba(37,99,235,.10);
-    }
-    .nav ul{
-      display:flex;gap:22px;list-style:none;padding:0;margin:0;
-      font-weight:700;color:var(--sub);
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    .nav ul a{padding:10px 10px;border-radius:12px}
-    .nav ul a:hover{background:#f3f4f6;color:#111827}
+    header{
+      background:#fff;
+      border-bottom:1px solid var(--line);
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(180%) blur(10px);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
+    .brand-dot{
+      width:10px;height:10px;border-radius:999px;background:var(--accent);
+      box-shadow:0 0 0 5px rgba(37,99,235,.10);
+    }
+    .nav ul{
+      display:flex;gap:22px;list-style:none;padding:0;margin:0;
+      font-weight:700;color:var(--sub);
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .nav ul a{padding:10px 10px;border-radius:12px}
+    .nav ul a:hover{background:#f3f4f6;color:#111827}
 
-    .lang{
-      display:flex;gap:8px;align-items:center;
-      background:#fff;border:1px solid var(--line);
-      padding:6px;border-radius:999px;
-    }
-    .lang button{
-      border:0;background:transparent;
-      padding:8px 12px;border-radius:999px;
-      cursor:pointer;font-weight:800;color:var(--sub);
-    }
-    .lang button.active{background:var(--accent);color:#fff}
+    .lang{
+      display:flex;gap:8px;align-items:center;
+      background:#fff;border:1px solid var(--line);
+      padding:6px;border-radius:999px;
+    }
+    .lang button{
+      border:0;background:transparent;
+      padding:8px 12px;border-radius:999px;
+      cursor:pointer;font-weight:800;color:var(--sub);
+    }
+    .lang button.active{background:var(--accent);color:#fff}
 
-    /* sections */
-    section{margin:60px 0}
+    /* sections */
+    section{margin:60px 0}
 
-    /* HERO */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:24px;
-      align-items:start;
-    }
-    .badge{
-      display:inline-flex;gap:8px;align-items:center;
-      font-size:13px;font-weight:800;color:#374151;
-      background:#fff;border:1px solid var(--line);
-      padding:8px 12px;border-radius:999px;
-      box-shadow:0 8px 22px rgba(17,24,39,.05);
-      margin-bottom:14px;
-    }
-    h1{
-      font-size:46px;line-height:1.15;margin:10px 0 12px;
-      letter-spacing:-.02em;
-    }
-    .hero-sub{color:var(--sub);font-size:18px;line-height:1.6;margin:0 0 18px}
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:24px;
+      align-items:start;
+    }
+    .badge{
+      display:inline-flex;gap:8px;align-items:center;
+      font-size:13px;font-weight:800;color:#374151;
+      background:#fff;border:1px solid var(--line);
+      padding:8px 12px;border-radius:999px;
+      box-shadow:0 8px 22px rgba(17,24,39,.05);
+      margin-bottom:14px;
+    }
+    h1{
+      font-size:46px;line-height:1.15;margin:10px 0 12px;
+      letter-spacing:-.02em;
+    }
+    .hero-sub{color:var(--sub);font-size:18px;line-height:1.6;margin:0 0 18px}
 
-    .hero-actions{
-      display:flex;gap:12px;flex-wrap:wrap;align-items:center;
-      margin-top:10px;
-    }
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:8px;
-      padding:12px 16px;border-radius:14px;
-      font-weight:900;cursor:pointer;border:1px solid var(--line);
-      background:#fff;color:#111827;
-      box-shadow:0 12px 30px rgba(17,24,39,.06);
-      transition:.15s transform ease;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.primary{background:var(--accent);border-color:transparent;color:#fff}
-    .btn.secondary{background:#fff}
+    .hero-actions{
+      display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+      margin-top:10px;
+    }
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:8px;
+      padding:12px 16px;border-radius:14px;
+      font-weight:900;cursor:pointer;border:1px solid var(--line);
+      background:#fff;color:#111827;
+      box-shadow:0 12px 30px rgba(17,24,39,.06);
+      transition:.15s transform ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:var(--accent);border-color:transparent;color:#fff}
+    .btn.secondary{background:#fff}
 
-    .note{
-      margin-top:14px;
-      padding:14px 16px;
-      border-radius:14px;
-      background:#fff7ed;
-      border:1px solid #fed7aa;
-      color:#92400e;
-      font-size:14px;
-      line-height:1.5;
-      display:none;
-    }
+    .note{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:14px;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      color:#92400e;
+      font-size:14px;
+      line-height:1.5;
+      display:none;
+    }
 
-    /* Cards */
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:22px;
-      box-shadow:var(--shadow);
-      border:1px solid rgba(229,231,235,.9);
-    }
+    /* Cards */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(229,231,235,.9);
+    }
 
-    /* TOP PROOF */
-    .proof-card .title{
-      font-size:12px;
-      font-weight:950;
-      letter-spacing:.12em;
-      color:var(--sub);
-      margin-bottom:12px;
-    }
+    /* TOP PROOF */
+    .proof-card .title{
+      font-size:12px;
+      font-weight:950;
+      letter-spacing:.12em;
+      color:var(--sub);
+      margin-bottom:12px;
+    }
 
-    .proof-frame{
-      width:100%;
-      aspect-ratio: 16 / 9;
-      border-radius:16px;
-      background:#f3f4f6;
-      border:2px dashed var(--line);
-      overflow:hidden;
-      position:relative;
-    }
+    .proof-frame{
+      width:100%;
+      aspect-ratio: 16 / 9;
+      border-radius:16px;
+      background:#f3f4f6;
+      border:2px dashed var(--line);
+      overflow:hidden;
+      position:relative;
+    }
 
-    /* [수정] 슬라이드 기능 (상단 + 레퍼런스 공통 적용) */
-    #proofSlider, #refSlider {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+    #proofSlider{
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+    #proofSlider img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0;
+      transition:opacity .45s ease;
+    }
+    #proofSlider img.active{opacity:1}
 
-    #proofSlider img, #refSlider img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity .45s ease;
-    }
+    .proof-meta{
+      margin-top:14px;
+      color:var(--sub);
+      font-size:14px;
+      line-height:1.5;
+    }
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .tag{
+      font-size:12px;
+      font-weight:800;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#374151;
+    }
 
-    /* 상단 슬라이드는 꽉 채우기 (Cover) */
-    #proofSlider img {
-      object-fit: cover;
-    }
+    /* Other sections */
+    h2{font-size:28px;margin:0 0 14px;letter-spacing:-.01em}
+    .section-sub{color:var(--sub);margin:0 0 18px;line-height:1.6}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 
-    /* 레퍼런스 슬라이드는 글씨 안 짤리게 다 보여주기 (Contain) */
-    #refSlider img {
-      object-fit: contain;
-      background: white;
-    }
+    .profile{display:flex;gap:18px;align-items:flex-start}
+    .photo{
+      width:118px;aspect-ratio:3/4;
+      border-radius:14px;background:#e5e7eb;
+      overflow:hidden;display:flex;align-items:center;justify-content:center;
+      color:#9ca3af;font-weight:900;border:1px solid #e5e7eb;flex:0 0 auto;
+    }
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .label{font-size:12px;font-weight:950;color:var(--accent);letter-spacing:.08em}
+    .name{font-size:20px;font-weight:950;margin:6px 0 8px}
+    .desc{color:var(--sub);line-height:1.55;margin:0 0 10px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;color:#374151;font-weight:800;font-size:13px}
+    .meta span{background:#f9fafb;border:1px solid #e5e7eb;padding:8px 10px;border-radius:999px}
 
-    /* 활성화된 이미지 보이기 */
-    #proofSlider img.active, #refSlider img.active {
-      opacity: 1;
-    }
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;line-height:1.55}
 
-    .proof-meta{
-      margin-top:14px;
-      color:var(--sub);
-      font-size:14px;
-      line-height:1.5;
-    }
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:10px;
-    }
-    .tag{
-      font-size:12px;
-      font-weight:800;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:#374151;
-    }
+    .ref-box{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+    .ref-links{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+    .ref-links a{font-weight:900;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
+    .ref-links a:hover{text-decoration:underline}
+    .mini-muted{color:var(--sub);font-size:13px;line-height:1.55;margin-top:8px}
 
-    /* Other sections */
-    h2{font-size:28px;margin:0 0 14px;letter-spacing:-.01em}
-    .section-sub{color:var(--sub);margin:0 0 18px;line-height:1.6}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .contact-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 
-    .profile{display:flex;gap:18px;align-items:flex-start}
-    .photo{
-      width:118px;aspect-ratio:3/4;
-      border-radius:14px;background:#e5e7eb;
-      overflow:hidden;display:flex;align-items:center;justify-content:center;
-      color:#9ca3af;font-weight:900;border:1px solid #e5e7eb;flex:0 0 auto;
-    }
-    .photo img{width:100%;height:100%;object-fit:cover;display:block}
-    .label{font-size:12px;font-weight:950;color:var(--accent);letter-spacing:.08em}
-    .name{font-size:20px;font-weight:950;margin:6px 0 8px}
-    .desc{color:var(--sub);line-height:1.55;margin:0 0 10px}
-    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;color:#374151;font-weight:800;font-size:13px}
-    .meta span{background:#f9fafb;border:1px solid #e5e7eb;padding:8px 10px;border-radius:999px}
+    /* Modal */
+    .modal-backdrop{
+      position:fixed;inset:0;background:rgba(17,24,39,.55);
+      display:none;align-items:center;justify-content:center;
+      padding:18px;z-index:100;
+    }
+    .modal{
+      width:min(560px, 100%);
+      background:#fff;border-radius:18px;
+      box-shadow:0 30px 80px rgba(0,0,0,.25);
+      border:1px solid rgba(229,231,235,.9);
+      overflow:hidden;
+    }
+    .modal-head{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 16px;border-bottom:1px solid var(--line);
+      font-weight:950;
+    }
+    .modal-body{padding:16px}
+    .qr{width:100%;border-radius:14px;border:1px solid var(--line);background:#f3f4f6;overflow:hidden}
+    .qr img{width:100%;height:auto;display:block}
+    .close{border:0;background:#f3f4f6;border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:900}
 
-    ul{margin:0;padding-left:18px}
-    li{margin:8px 0;line-height:1.55}
+    footer{margin:60px 0;color:var(--sub)}
 
-    .ref-box{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-    .ref-links{display:flex;flex-direction:column;gap:10px;margin-top:10px}
-    .ref-links a{font-weight:900;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
-    .ref-links a:hover{text-decoration:underline}
-    .mini-muted{color:var(--sub);font-size:13px;line-height:1.55;margin-top:8px}
-
-    .contact-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-
-    /* Modal */
-    .modal-backdrop{
-      position:fixed;inset:0;background:rgba(17,24,39,.55);
-      display:none;align-items:center;justify-content:center;
-      padding:18px;z-index:100;
-    }
-    .modal{
-      width:min(560px, 100%);
-      background:#fff;border-radius:18px;
-      box-shadow:0 30px 80px rgba(0,0,0,.25);
-      border:1px solid rgba(229,231,235,.9);
-      overflow:hidden;
-    }
-    .modal-head{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 16px;border-bottom:1px solid var(--line);
-      font-weight:950;
-    }
-    .modal-body{padding:16px}
-    .qr{width:100%;border-radius:14px;border:1px solid var(--line);background:#f3f4f6;overflow:hidden}
-    .qr img{width:100%;height:auto;display:block}
-    .close{border:0;background:#f3f4f6;border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:900}
-
-    footer{margin:60px 0;color:var(--sub)}
-
-    /* responsive */
-    @media (max-width: 980px){
-      .hero{grid-template-columns:1fr;gap:16px}
-      h1{font-size:38px}
-      .grid{grid-template-columns:1fr}
-      .nav ul{display:none}
-    }
-  </style>
+    /* responsive */
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr;gap:16px}
+      h1{font-size:38px}
+      .grid{grid-template-columns:1fr}
+      .nav ul{display:none}
+    }
+  </style>
 </head>
 
 <body>
 <header>
-  <div class="wrap nav">
-    <div class="brand">
-      <span class="brand-dot"></span>
-      <strong>Dotorin</strong>
-    </div>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <strong>Dotorin</strong>
+    </div>
 
-    <ul>
-      <li><a href="#proof" data-kr="성과" data-en="Proof" data-cn="成果">성과</a></li>
-      <li><a href="#who" data-kr="소개" data-en="Who" data-cn="介绍">소개</a></li>
-      <li><a href="#offer" data-kr="제공" data-en="Offer" data-cn="提供">제공</a></li>
-      <li><a href="#process" data-kr="진행" data-en="Process" data-cn="流程">진행</a></li>
-      <li><a href="#reference" data-kr="레퍼런스" data-en="Reference" data-cn="参考">레퍼런스</a></li>
-      <li><a href="#contact" data-kr="연락" data-en="Contact" data-cn="联系">연락</a></li>
-    </ul>
+    <ul>
+      <li><a href="#proof" data-kr="성과" data-en="Proof" data-cn="成果">성과</a></li>
+      <li><a href="#who" data-kr="소개" data-en="Who" data-cn="介绍">소개</a></li>
+      <li><a href="#offer" data-kr="제공" data-en="Offer" data-cn="提供">제공</a></li>
+      <li><a href="#process" data-kr="진행" data-en="Process" data-cn="流程">진행</a></li>
+      <li><a href="#reference" data-kr="레퍼런스" data-en="Reference" data-cn="参考">레퍼런스</a></li>
+      <li><a href="#contact" data-kr="연락" data-en="Contact" data-cn="联系">연락</a></li>
+    </ul>
 
-    <div class="lang" aria-label="Language switch">
-      <button class="active" data-lang="kr" onclick="setLang('kr')">KR</button>
-      <button data-lang="en" onclick="setLang('en')">EN</button>
-      <button data-lang="cn" onclick="setLang('cn')">CN</button>
-    </div>
-  </div>
+    <div class="lang" aria-label="Language switch">
+      <button class="active" data-lang="kr" onclick="setLang('kr')">KR</button>
+      <button data-lang="en" onclick="setLang('en')">EN</button>
+      <button data-lang="cn" onclick="setLang('cn')">CN</button>
+    </div>
+  </div>
 </header>
 
 <main class="wrap">
 
-  <!-- HERO + TOP PROOF -->
-  <section class="hero" id="proof">
-    <!-- LEFT -->
-    <div>
-      <div class="badge"
-           data-kr="Region-ready · Evidence-first · Mobile-friendly"
-           data-en="Region-ready · Evidence-first · Mobile-friendly"
-           data-cn="可跨地区 · 证据优先 · 适配移动端">
-        Region-ready · Evidence-first · Mobile-friendly
-      </div>
+  <!-- HERO + TOP PROOF -->
+  <section class="hero" id="proof">
+    <!-- LEFT -->
+    <div>
+      <div class="badge"
+           data-kr="Region-ready · Evidence-first · Mobile-friendly"
+           data-en="Region-ready · Evidence-first · Mobile-friendly"
+           data-cn="可跨地区 · 证据优先 · 适配移动端">
+        Region-ready · Evidence-first · Mobile-friendly
+      </div>
 
-            <h1
-        data-kr="당신의 공간을<br>'핫 플레이스로'"
-        data-en="Make Your Space<br>a Korean 'Hot Place'"
-        data-cn="将您的空间<br>打造为'热门打卡地'">
-        당신의 공간을<br>'핫 플레이스로'
-      </h1>
+            <h1
+        data-kr="당신의 공간을<br>'핫 플레이스로'"
+        data-en="Make Your Space<br>a Korean 'Hot Place'"
+        data-cn="将您的空间<br>打造为'热门打卡地'">
+        당신의 공간을<br>'핫 플레이스로'
+      </h1>
 
-      <p class="hero-sub"
-         data-kr="트렌드를 만드는 크리에이터의 마케팅 제안서"
-         data-en="Marketing proposal from a trend-leading creator"
-         data-cn="来自引领潮流创作者的营销提案">
-        트렌드를 만드는 크리에이터의 마케팅 제안서
-      </p>
-      </p>
+      <p class="hero-sub"
+         data-kr="트렌드를 만드는 크리에이터의 마케팅 제안서"
+         data-en="Marketing proposal from a trend-leading creator"
+         data-cn="来自引领潮流创作者的营销提案">
+        트렌드를 만드는 크리에이터의 마케팅 제안서
+      </p>
+      </p>
 
-      <div class="hero-actions">
-        <a class="btn primary" href="#contact"
-           data-kr="협업 문의하기"
-           data-en="Contact"
-           data-cn="合作咨询">협업 문의하기</a>
+      <div class="hero-actions">
+        <a class="btn primary" href="#contact"
+           data-kr="협업 문의하기"
+           data-en="Contact"
+           data-cn="合作咨询">협업 문의하기</a>
 
-        <a class="btn" href="#reference"
-           data-kr="레퍼런스 보기"
-           data-en="See references"
-           data-cn="查看资料">레퍼런스 보기</a>
-      </div>
+        <a class="btn" href="#reference"
+           data-kr="레퍼런스 보기"
+           data-en="See references"
+           data-cn="查看资料">레퍼런스 보기</a>
+      </div>
 
-      <div class="note" id="cnNote">
-        중국 본토 등 일부 지역에서는 YouTube 접근이 제한될 수 있어,<br>
-        본 페이지는 ‘재생’이 아닌 ‘증거(캡처/수치/요약)’ 중심으로 구성되었습니다.
-      </div>
-    </div>
+      <div class="note" id="cnNote">
+        중국 본토 등 일부 지역에서는 YouTube 접근이 제한될 수 있어,<br>
+        본 페이지는 ‘재생’이 아닌 ‘증거(캡처/수치/요약)’ 중심으로 구성되었습니다.
+      </div>
+    </div>
 
-    <!-- RIGHT -->
-    <div class="card proof-card">
-      <div class="title">TOP PROOF</div>
+    <!-- RIGHT -->
+    <div class="card proof-card">
+      <div class="title">TOP PROOF</div>
 
-     <div id="proofSlider">
-          <img class="active" src="slide1.jpg" alt="Highlight 1">
-          
-          <img src="slide2.jpg" alt="Highlight 2">
-          
-          <img src="slide3.jpg" alt="Highlight 3">
-        </div>
+      <div class="proof-frame">
+        <div id="proofSlider">
+          <img class="active" src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+1" alt="Top proof 1">
+          <img src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+2" alt="Top proof 2">
+          <img src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+3" alt="Top proof 3">
+        </div>
+      </div>
 
-      <div class="proof-meta"
-           data-kr="콘텐츠: 대표 여행 Vlog (썸네일 캡쳐 넣기)"
-           data-en="Content: flagship travel vlog (add thumbnail captures)"
-           data-cn="内容：代表旅行Vlog（可放缩略图截图）">
-        콘텐츠: 대표 여행 Vlog (썸네일 캡쳐 넣기)
-      </div>
+      <div class="proof-meta"
+           data-kr="콘텐츠: 대표 여행 Vlog (썸네일 캡쳐 넣기)"
+           data-en="Content: flagship travel vlog (add thumbnail captures)"
+           data-cn="内容：代表旅行Vlog（可放缩略图截图）">
+        콘텐츠: 대표 여행 Vlog (썸네일 캡쳐 넣기)
+      </div>
 
-      <div class="tags">
-        <span class="tag" data-kr="#성과요약" data-en="#metrics" data-cn="#数据汇总">#성과요약</span>
-        <span class="tag" data-kr="#캡처기반" data-en="#captures" data-cn="#截图证明">#캡처기반</span>
-        <!-- 내부공유는 의미가 애매해서 더 명확한 말로 바꿔둠 -->
-        <span class="tag" data-kr="#보고용" data-en="#report-ready" data-cn="#可汇报">#보고용</span>
-      </div>
-    </div>
-  </section>
+      <div class="tags">
+        <span class="tag" data-kr="#성과요약" data-en="#metrics" data-cn="#数据汇总">#성과요약</span>
+        <span class="tag" data-kr="#캡처기반" data-en="#captures" data-cn="#截图证明">#캡처기반</span>
+        <!-- 내부공유는 의미가 애매해서 더 명확한 말로 바꿔둠 -->
+        <span class="tag" data-kr="#보고용" data-en="#report-ready" data-cn="#可汇报">#보고용</span>
+      </div>
+    </div>
+  </section>
 
-  <!-- WHO -->
-  <section id="who">
-    <h2 data-kr="소개" data-en="Who" data-cn="介绍">소개</h2>
-    <p class="section-sub"
-       data-kr="담당자가 ‘사람/역할’을 빠르게 이해하도록, 핵심만 카드로 정리했습니다."
-       data-en="Cards that help decision-makers understand roles quickly."
-       data-cn="用卡片快速说明角色与强项。">
-      담당자가 ‘사람/역할’을 빠르게 이해하도록, 핵심만 카드로 정리했습니다.
-    </p>
+  <!-- WHO -->
+  <section id="who">
+    <h2 data-kr="소개" data-en="Who" data-cn="介绍">소개</h2>
+    <p class="section-sub"
+       data-kr="담당자가 ‘사람/역할’을 빠르게 이해하도록, 핵심만 카드로 정리했습니다."
+       data-en="Cards that help decision-makers understand roles quickly."
+       data-cn="用卡片快速说明角色与强项。">
+      담당자가 ‘사람/역할’을 빠르게 이해하도록, 핵심만 카드로 정리했습니다.
+    </p>
 
-    <div class="grid">
-      <!-- Dotorin -->
-      <div class="card">
-        <div class="profile">
-          <div class="photo">
-           <img src="./dotorin.jpg" alt="Dotorin">
-          </div>
-          <div>
-            <div class="label"
-                 data-kr="메인 크리에이터" data-en="MAIN CREATOR" data-cn="主创作者">
-              메인 크리에이터
-            </div>
-            <div class="name">Dotorin (도토린)</div>
-            <p class="desc"
-               data-kr="보여주는 것을 넘어, <b>설득합니다.</b><br>23만 뷰 기획력 × 현직 쇼호스트의 전달력으로<br><b>‘지금 가야 할 이유’</b>를 분명하게 전달합니다."
-               data-en="Beyond just showing, <b>I persuade.</b><br>Combining 230k-view planning skills × showhost delivery,<br>I clearly convey <b>'why you must visit now'.</b>"
-               data-cn="超越展示，<b>更是说服。</b><br>23万播放量的策划力 × 现职购物主持的表达力，<br>明确传达<b>“现在必须去的理由”。</b>">
-              
-              보여주는 것을 넘어, <b>설득합니다.</b><br>
-              23만 뷰 기획력 × 현직 쇼호스트의 전달력으로<br>
-              <b>‘지금 가야 할 이유’</b>를 분명하게 전달합니다.
-            </p>
+    <div class="grid">
+      <!-- Dotorin -->
+      <div class="card">
+        <div class="profile">
+          <div class="photo">
+           <img src="./dotorin.jpg" alt="Dotorin">
+          </div>
+          <div>
+            <div class="label"
+                 data-kr="메인 크리에이터" data-en="MAIN CREATOR" data-cn="主创作者">
+              메인 크리에이터
+            </div>
+            <div class="name">Dotorin (도토린)</div>
+            <p class="desc"
+               data-kr="보여주는 것을 넘어, <b>설득합니다.</b><br>23만 뷰 기획력 × 현직 쇼호스트의 전달력으로<br><b>‘지금 가야 할 이유’</b>를 분명하게 전달합니다."
+               data-en="Beyond just showing, <b>I persuade.</b><br>Combining 230k-view planning skills × showhost delivery,<br>I clearly convey <b>'why you must visit now'.</b>"
+               data-cn="超越展示，<b>更是说服。</b><br>23万播放量的策划力 × 现职购物主持的表达力，<br>明确传达<b>“现在必须去的理由”。</b>">
+              
+              보여주는 것을 넘어, <b>설득합니다.</b><br>
+              23만 뷰 기획력 × 현직 쇼호스트의 전달력으로<br>
+              <b>‘지금 가야 할 이유’</b>를 분명하게 전달합니다.
+            </p>
 
-            <div class="meta">
-              <span data-kr="설명형 전달" data-en="Explainer" data-cn="讲解型">설명형 전달</span>
-              <span data-kr="전환 중심" data-en="Conversion" data-cn="转化导向">전환 중심</span>
-              <span data-kr="카드형 요약" data-en="Card summary" data-cn="卡片摘要">카드형 요약</span>
-            </div>
-          </div>
-        </div>
-      </div>
+            <div class="meta">
+              <span data-kr="설명형 전달" data-en="Explainer" data-cn="讲解型">설명형 전달</span>
+              <span data-kr="전환 중심" data-en="Conversion" data-cn="转化导向">전환 중심</span>
+              <span data-kr="카드형 요약" data-en="Card summary" data-cn="卡片摘要">카드형 요약</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <!-- Somyeong -->
-      <div class="card">
-        <div class="profile">
-          <div class="photo">
-            <img src="./somyeong.jpg" alt="Somyeong">
-          </div>
-          <div>
-            <div class="label"
-                 data-kr="파트너" data-en="PARTNER" data-cn="合作伙伴">
-              파트너
-            </div>
-            <div class="name">Somyeong (소먕)</div>
-            <p class="desc"
-               data-kr="빠른 트렌드 캐치와 <b>감각적인 편집 실력</b>을 겸비했습니다.<br>보는 순간 빠져드는 영상미와 <b>리얼한 먹방</b>으로,<br><b>MZ세대 팬덤을 확실하게 움직입니다.</b>"
-               data-en="Combining fast trend-spotting with <b>sensational editing skills.</b><br>With captivating visuals and <b>real mukbang,</b><br>she <b>surely moves the Gen Z fandom.</b>"
-               data-cn="兼备敏锐的潮流嗅觉与<b>感性的剪辑实力</b>。<br>用让人瞬间沉浸的唯美画面与<b>真实吃播</b>，<br><b>牢牢抓住 MZ 世代粉丝群的心。</b>">
-              
-              빠른 트렌드 캐치와 <b>감각적인 편집 실력</b>을 겸비했습니다.<br>
-              보는 순간 빠져드는 영상미와 <b>리얼한 먹방</b>으로,<br>
-              <b>MZ세대 팬덤을 확실하게 움직입니다.</b>
-            </p>
+      <!-- Somyeong -->
+      <div class="card">
+        <div class="profile">
+          <div class="photo">
+            <img src="./somyeong.jpg" alt="Somyeong">
+          </div>
+          <div>
+            <div class="label"
+                 data-kr="파트너" data-en="PARTNER" data-cn="合作伙伴">
+              파트너
+            </div>
+            <div class="name">Somyeong (소먕)</div>
+            <p class="desc"
+               data-kr="빠른 트렌드 캐치와 <b>감각적인 편집 실력</b>을 겸비했습니다.<br>보는 순간 빠져드는 영상미와 <b>리얼한 먹방</b>으로,<br><b>MZ세대 팬덤을 확실하게 움직입니다.</b>"
+               data-en="Combining fast trend-spotting with <b>sensational editing skills.</b><br>With captivating visuals and <b>real mukbang,</b><br>she <b>surely moves the Gen Z fandom.</b>"
+               data-cn="兼备敏锐的潮流嗅觉与<b>感性的剪辑实力</b>。<br>用让人瞬间沉浸的唯美画面与<b>真实吃播</b>，<br><b>牢牢抓住 MZ 世代粉丝群的心。</b>">
+              
+              빠른 트렌드 캐치와 <b>감각적인 편집 실력</b>을 겸비했습니다.<br>
+              보는 순간 빠져드는 영상미와 <b>리얼한 먹방</b>으로,<br>
+              <b>MZ세대 팬덤을 확실하게 움직입니다.</b>
+            </p>
 
-            <div class="meta">
-              <span data-kr="YouTube" data-en="YouTube" data-cn="YouTube">YouTube</span>
-              <span data-kr="Rednote" data-en="Rednote" data-cn="小红书">Rednote</span>
-              <span data-kr="트렌드 편집" data-en="Trend edit" data-cn="趋势剪辑">트렌드 편집</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="meta">
+              <span data-kr="YouTube" data-en="YouTube" data-cn="YouTube">YouTube</span>
+              <span data-kr="Rednote" data-en="Rednote" data-cn="小红书">Rednote</span>
+              <span data-kr="트렌드 편집" data-en="Trend edit" data-cn="趋势剪辑">트렌드 편집</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- OFFER -->
- <section id="offer">
-    <h2 data-kr="솔루션" data-en="Our Solutions" data-cn="解决方案">솔루션</h2>
-    
-    <p class="section-sub"
-       data-kr="‘영상 1개’만 던져드리지 않습니다.<br>보고와 내부 공유까지 완벽하게 끝내는 <b>결과물 패키지</b>입니다."
-       data-en="We don't just send a video file.<br>We provide a <b>complete package</b> ready for reporting and sharing."
-       data-cn="不只提供“一个视频文件”。<br>为您提供包含汇报与内部共享功能的<b>完整成果包</b>。">
-      ‘영상 1개’만 던져드리지 않습니다.<br>
-      보고와 내부 공유까지 완벽하게 끝내는 <b>결과물 패키지</b>입니다.
-    </p>
+  <!-- OFFER -->
+ <section id="offer">
+    <h2 data-kr="솔루션" data-en="Our Solutions" data-cn="解决方案">솔루션</h2>
+    
+    <p class="section-sub"
+       data-kr="‘영상 1개’만 던져드리지 않습니다.<br>보고와 내부 공유까지 완벽하게 끝내는 <b>결과물 패키지</b>입니다."
+       data-en="We don't just send a video file.<br>We provide a <b>complete package</b> ready for reporting and sharing."
+       data-cn="不只提供“一个视频文件”。<br>为您提供包含汇报与内部共享功能的<b>完整成果包</b>。">
+      ‘영상 1개’만 던져드리지 않습니다.<br>
+      보고와 내부 공유까지 완벽하게 끝내는 <b>결과물 패키지</b>입니다.
+    </p>
 
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-      
-      <div class="card" style="text-align:center; padding:30px 20px;">
-        <div style="font-size:40px; margin-bottom:15px;">🎬</div>
-        <h3 style="font-size:18px; font-weight:950; margin-bottom:10px;"
-            data-kr="High-End Vlog" data-en="High-End Vlog" data-cn="高端 Vlog">
-          High-End Vlog
-        </h3>
-        <p style="font-size:15px; color:#4b5563; line-height:1.6; margin:0;"
-           data-kr="단순 기록이 아닙니다.<br>영화 같은 영상미로 방문 욕구를 자극하는<br><b>시네마틱 브이로그</b>를 제작합니다."
-           data-en="Not just a record.<br>We create <b>cinematic vlogs</b><br>that spark the desire to visit."
-           data-cn="绝非单纯记录。<br>制作如电影般唯美、<br>激发访问欲望的<b>电影感 Vlog</b>。">
-          단순 기록이 아닙니다.<br>
-          영화 같은 영상미로 방문 욕구를 자극하는<br>
-          <b>시네마틱 브이로그</b>를 제작합니다.
-        </p>
-      </div>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+      
+      <div class="card" style="text-align:center; padding:30px 20px;">
+        <div style="font-size:40px; margin-bottom:15px;">🎬</div>
+        <h3 style="font-size:18px; font-weight:950; margin-bottom:10px;"
+            data-kr="High-End Vlog" data-en="High-End Vlog" data-cn="高端 Vlog">
+          High-End Vlog
+        </h3>
+        <p style="font-size:15px; color:#4b5563; line-height:1.6; margin:0;"
+           data-kr="단순 기록이 아닙니다.<br>영화 같은 영상미로 방문 욕구를 자극하는<br><b>시네마틱 브이로그</b>를 제작합니다."
+           data-en="Not just a record.<br>We create <b>cinematic vlogs</b><br>that spark the desire to visit."
+           data-cn="绝非单纯记录。<br>制作如电影般唯美、<br>激发访问欲望的<b>电影感 Vlog</b>。">
+          단순 기록이 아닙니다.<br>
+          영화 같은 영상미로 방문 욕구를 자극하는<br>
+          <b>시네마틱 브이로그</b>를 제작합니다.
+        </p>
+      </div>
 
-      <div class="card" style="text-align:center; padding:30px 20px; border: 2px solid #2563eb;">
-        <div style="font-size:40px; margin-bottom:15px;">📊</div>
-        <h3 style="font-size:18px; font-weight:950; margin-bottom:10px; color:#2563eb;"
-            data-kr="Proof Kit (증거 키트)" data-en="Proof Kit" data-cn="证据包 (Proof Kit)">
-          Proof Kit (증거 키트)
-        </h3>
-        <p style="font-size:15px; color:#4b5563; line-height:1.6; margin:0;"
-           data-kr="복잡한 보고서는 필요 없습니다.<br>조회수·도달률 등 핵심 성과를 담은<br><b>요약 카드(이미지)</b>를 드립니다."
-           data-en="No need for complex reports.<br>We provide <b>summary cards</b><br>with key metrics like views & reach."
-           data-cn="无需复杂的报告书。<br>为您提供包含播放量/触达率等<br>核心成果的<b>摘要卡片(图片)</b>。">
-          복잡한 보고서는 필요 없습니다.<br>
-          조회수·도달률 등 핵심 성과를 담은<br>
-          <b>요약 카드(이미지)</b>를 드립니다.
-        </p>
-      </div>
+      <div class="card" style="text-align:center; padding:30px 20px; border: 2px solid #2563eb;">
+        <div style="font-size:40px; margin-bottom:15px;">📊</div>
+        <h3 style="font-size:18px; font-weight:950; margin-bottom:10px; color:#2563eb;"
+            data-kr="Proof Kit (증거 키트)" data-en="Proof Kit" data-cn="证据包 (Proof Kit)">
+          Proof Kit (증거 키트)
+        </h3>
+        <p style="font-size:15px; color:#4b5563; line-height:1.6; margin:0;"
+           data-kr="복잡한 보고서는 필요 없습니다.<br>조회수·도달률 등 핵심 성과를 담은<br><b>요약 카드(이미지)</b>를 드립니다."
+           data-en="No need for complex reports.<br>We provide <b>summary cards</b><br>with key metrics like views & reach."
+           data-cn="无需复杂的报告书。<br>为您提供包含播放量/触达率等<br>核心成果的<b>摘要卡片(图片)</b>。">
+          복잡한 보고서는 필요 없습니다.<br>
+          조회수·도달률 등 핵심 성과를 담은<br>
+          <b>요약 카드(이미지)</b>를 드립니다.
+        </p>
+      </div>
 
-      <div class="card" style="text-align:center; padding:30px 20px;">
-        <div style="font-size:40px; margin-bottom:15px;">🌏</div>
-        <h3 style="font-size:18px; font-weight:950; margin-bottom:10px;"
-            data-kr="Global Viral" data-en="Global Viral" data-cn="全球扩散">
-          Global Viral
-        </h3>
-        <p style="font-size:15px; color:#4b5563; line-height:1.6; margin:0;"
-           data-kr="<b>한국 유튜브</b>뿐만 아니라,<br><b>중국 샤오홍슈(Rednote)</b>에도 동시 노출하여<br>국경 없는 홍보 효과를 만듭니다."
-           data-en="Exposure on both <b>YouTube (KR)</b><br>and <b>Rednote (CN)</b>,<br>creating borderless marketing effects."
-           data-cn="不仅在<b>韩国 YouTube</b>，<br>同步曝光于<b>中国小红书</b>，<br>创造跨越国界的宣传效果。">
-          <b>한국 유튜브</b>뿐만 아니라,<br>
-          <b>중국 샤오홍슈(Rednote)</b>에도 동시 노출하여<br>
-          국경 없는 홍보 효과를 만듭니다.
-        </p>
-      </div>
+      <div class="card" style="text-align:center; padding:30px 20px;">
+        <div style="font-size:40px; margin-bottom:15px;">🌏</div>
+        <h3 style="font-size:18px; font-weight:950; margin-bottom:10px;"
+            data-kr="Global Viral" data-en="Global Viral" data-cn="全球扩散">
+          Global Viral
+        </h3>
+        <p style="font-size:15px; color:#4b5563; line-height:1.6; margin:0;"
+           data-kr="<b>한국 유튜브</b>뿐만 아니라,<br><b>중국 샤오홍슈(Rednote)</b>에도 동시 노출하여<br>국경 없는 홍보 효과를 만듭니다."
+           data-en="Exposure on both <b>YouTube (KR)</b><br>and <b>Rednote (CN)</b>,<br>creating borderless marketing effects."
+           data-cn="不仅在<b>韩国 YouTube</b>，<br>同步曝光于<b>中国小红书</b>，<br>创造跨越国界的宣传效果。">
+          <b>한국 유튜브</b>뿐만 아니라,<br>
+          <b>중국 샤오홍슈(Rednote)</b>에도 동시 노출하여<br>
+          국경 없는 홍보 효과를 만듭니다.
+        </p>
+      </div>
 
-    </div>
-  </section>
+    </div>
+  </section>
 
-  <!-- PROCESS -->
-  <section id="process">
-    <h2 data-kr="진행" data-en="Process" data-cn="流程">진행</h2>
-    <p class="section-sub"
-       data-kr="협업 방식은 단순하고 명확하게 진행합니다."
-       data-en="A simple, clear collaboration process."
-       data-cn="合作流程简洁清晰。">
-      협업 방식은 단순하고 명확하게 진행합니다.
-    </p>
+  <!-- PROCESS -->
+  <section id="process">
+    <h2 data-kr="진행" data-en="Process" data-cn="流程">진행</h2>
+    <p class="section-sub"
+       data-kr="협업 방식은 단순하고 명확하게 진행합니다."
+       data-en="A simple, clear collaboration process."
+       data-cn="合作流程简洁清晰。">
+      협업 방식은 단순하고 명확하게 진행합니다.
+    </p>
 
-    <div class="grid">
-      <div class="card">
-        <h3 style="margin:0 0 10px;font-size:16px;font-weight:950"
-            data-kr="1) 협의" data-en="1) Align" data-cn="1) 对齐">1) 협의</h3>
-        <ul>
-          <li data-kr="제공 범위 확인 (숙박/식사/체험 등)"
-              data-en="Confirm scope (stay/meal/experience, etc.)"
-              data-cn="确认合作范围（住宿/餐饮/体验等）">
-            제공 범위 확인 (숙박/식사/체험 등)
-          </li>
-          <li data-kr="핵심 포인트 합의 (메뉴/공간/타깃/브랜드 메시지)"
-              data-en="Agree on key points (menu/space/target/message)"
-              data-cn="对齐核心重点（菜品/空间/受众/品牌信息）">
-            핵심 포인트 합의 (메뉴/공간/타깃/브랜드 메시지)
-          </li>
-        </ul>
-      </div>
+    <div class="grid">
+      <div class="card">
+        <h3 style="margin:0 0 10px;font-size:16px;font-weight:950"
+            data-kr="1) 협의" data-en="1) Align" data-cn="1) 对齐">1) 협의</h3>
+        <ul>
+          <li data-kr="제공 범위 확인 (숙박/식사/체험 등)"
+              data-en="Confirm scope (stay/meal/experience, etc.)"
+              data-cn="确认合作范围（住宿/餐饮/体验等）">
+            제공 범위 확인 (숙박/식사/체험 등)
+          </li>
+          <li data-kr="핵심 포인트 합의 (메뉴/공간/타깃/브랜드 메시지)"
+              data-en="Agree on key points (menu/space/target/message)"
+              data-cn="对齐核心重点（菜品/空间/受众/品牌信息）">
+            핵심 포인트 합의 (메뉴/공간/타깃/브랜드 메시지)
+          </li>
+        </ul>
+      </div>
 
-      <div class="card">
-        <h3 style="margin:0 0 10px;font-size:16px;font-weight:950"
-            data-kr="2) 제작 & 제공" data-en="2) Produce & deliver" data-cn="2) 制作与交付">2) 제작 & 제공</h3>
-        <ul>
-          <li data-kr="촬영/편집 (필요 시 초안 공유)"
-              data-en="Shoot/edit (draft sharing if needed)"
-              data-cn="拍摄/剪辑（如需可分享初稿）">
-            촬영/편집 (필요 시 초안 공유)
-          </li>
-          <li data-kr="업로드/배포 + 성과/캡처 기반 ‘증거 카드’ 제공"
-              data-en="Publish + provide proof cards (metrics & captures)"
-              data-cn="发布 + 提供证据卡（数据&截图）">
-            업로드/배포 + 성과/캡처 기반 ‘증거 카드’ 제공
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
+      <div class="card">
+        <h3 style="margin:0 0 10px;font-size:16px;font-weight:950"
+            data-kr="2) 제작 & 제공" data-en="2) Produce & deliver" data-cn="2) 制作与交付">2) 제작 & 제공</h3>
+        <ul>
+          <li data-kr="촬영/편집 (필요 시 초안 공유)"
+              data-en="Shoot/edit (draft sharing if needed)"
+              data-cn="拍摄/剪辑（如需可分享初稿）">
+            촬영/편집 (필요 시 초안 공유)
+          </li>
+          <li data-kr="업로드/배포 + 성과/캡처 기반 ‘증거 카드’ 제공"
+              data-en="Publish + provide proof cards (metrics & captures)"
+              data-cn="发布 + 提供证据卡（数据&截图）">
+            업로드/배포 + 성과/캡처 기반 ‘증거 카드’ 제공
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  <!-- REFERENCE -->
- <section id="reference">
-    <h2 data-kr="레퍼런스" data-en="Reference" data-cn="参考资料">레퍼런스</h2>
-    <p class="section-sub"
-       data-kr="숫자로 증명하는 데이터와 준비된 글로벌 환경입니다."
-       data-en="Data-backed proof and global-ready environment."
-       data-cn="用数据证明实力，已备好全球化环境。">
-      숫자로 증명하는 데이터와 준비된 글로벌 환경입니다.
-    </p>
+  <!-- REFERENCE -->
+ <section id="reference">
+    <h2 data-kr="레퍼런스" data-en="Reference" data-cn="参考资料">레퍼런스</h2>
+    <p class="section-sub"
+       data-kr="말로만 하지 않습니다. 숫자가 증명하는 데이터입니다."
+       data-en="Data speaks louder than words."
+       data-cn="不只是口头承诺，用数据证明实力。">
+      말로만 하지 않습니다. 숫자가 증명하는 데이터입니다.
+    </p>
 
-    <div class="card" style="padding:15px; max-width:600px; margin:0 auto;">
-      <div style="font-weight:950; margin-bottom:10px; font-size:15px;">📊 Global Proof & Specs</div>
-      
-      <div class="proof-frame" style="height:350px;"> <div id="refSlider">
-          <img class="active" src="analytics_proof.jpg" alt="Analytics">
-          <img src="subtitle_proof.jpg" alt="Subtitles">
-        </div>
-      </div>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+      
+      <div class="card" style="padding:15px;">
+        <div style="font-weight:950; margin-bottom:10px; font-size:15px;">📊 Global Audience</div>
+        <div class="proof-frame">
+          <img src="analytics_proof.jpg" alt="Analytics" 
+               style="width:100%; height:100%; object-fit:contain; background:white;">
+        </div>
+        <div class="mini-muted" style="margin-top:10px;">
+          한국(26%) 외 중화권·영어권 시청자 보유
+        </div>
+      </div>
 
-      <div class="mini-muted" style="margin-top:10px; text-align:center;">
-        <span style="color:#2563eb; font-weight:bold;">Automatic Slide</span><br>
-        글로벌 시청자 통계 & 10개국어 자막 지원
-      </div>
-    </div>
-  </section>
-  <section id="contact">
-    <h2 data-kr="Contact & Profile" data-en="Contact & Profile" data-cn="联系方式">Contact & Profile</h2>
-    <p class="section-sub"
-       data-kr="각 크리에이터의 채널과 연락처를 확인하세요."
-       data-en="Check out each creator's channel and contact info."
-       data-cn="请确认各创作者的频道与联系方式。">
-      각 크리에이터의 채널과 연락처를 확인하세요.
-    </p>
+      <div class="card" style="padding:15px;">
+        <div style="font-weight:950; margin-bottom:10px; font-size:15px;">💬 Real Engagement</div>
+        <div class="proof-frame">
+          <img src="https://via.placeholder.com/600x400?text=Comming+Soon" alt="Comments" 
+               style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="mini-muted" style="margin-top:10px;">
+          실제 시청자들의 긍정적인 반응 및 댓글
+        </div>
+      </div>
 
-    <div class="grid">
-      
-      <div class="card" style="text-align:center; padding:30px 20px;">
-        <div style="width:80px; height:80px; margin:0 auto 15px; border-radius:50%; overflow:hidden; border:2px solid #e5e7eb;">
-          <img src="dotorin.jpg" alt="Dotorin" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        
-        <h3 style="margin:0 0 5px; font-size:20px; font-weight:950;">Dotorin</h3>
-        <p style="margin:0 0 20px; font-size:13px; color:#6b7280; font-weight:700;">Main Creator / Showhost</p>
+    </div>
+  </section>
 
-        <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;">
-          <a href="https://youtu.be/CVdxCVVnSbY" target="_blank" 
-             style="background:#212121; color:white; padding:8px 14px; border-radius:30px; font-size:13px; font-weight:800; display:flex; align-items:center; gap:5px; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-             <span style="color:#FF0000; font-size:16px;">▶</span> YouTube
-          </a>
-          <a href="#" target="_blank" 
-             style="background:#FF2442; color:white; padding:8px 14px; border-radius:30px; font-size:13px; font-weight:800; display:flex; align-items:center; gap:5px; box-shadow:0 4px 6px rgba(255,36,66,0.2);">
-             📕 Rednote
-          </a>
-        </div>
+  <section id="contact">
+    <h2 data-kr="Contact & Profile" data-en="Contact & Profile" data-cn="联系方式">Contact & Profile</h2>
+    <p class="section-sub"
+       data-kr="각 크리에이터의 채널과 연락처를 확인하세요."
+       data-en="Check out each creator's channel and contact info."
+       data-cn="请确认各创作者的频道与联系方式。">
+      각 크리에이터의 채널과 연락처를 확인하세요.
+    </p>
 
-        <div style="border-top:1px solid #eee; padding-top:15px; text-align:left; font-size:14px; line-height:1.8;">
-          <div>📧 <b>Email:</b> <a href="mailto:example@gmail.com" style="text-decoration:underline;">example@gmail.com</a></div>
-          <div style="display:flex; align-items:center; gap:5px;">
-            💬 <b>WeChat:</b> wxid_kvmr0oz
-            <button onclick="openModal()" style="border:1px solid #ddd; background:white; padding:2px 6px; border-radius:4px; font-size:11px; cursor:pointer;">QR</button>
-          </div>
-        </div>
-      </div>
+    <div class="grid">
+      
+      <div class="card" style="text-align:center; padding:30px 20px;">
+        <div style="width:80px; height:80px; margin:0 auto 15px; border-radius:50%; overflow:hidden; border:2px solid #e5e7eb;">
+          <img src="dotorin.jpg" alt="Dotorin" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        
+        <h3 style="margin:0 0 5px; font-size:20px; font-weight:950;">Dotorin</h3>
+        <p style="margin:0 0 20px; font-size:13px; color:#6b7280; font-weight:700;">Main Creator / Showhost</p>
 
-      <div class="card" style="text-align:center; padding:30px 20px;">
-        <div style="width:80px; height:80px; margin:0 auto 15px; border-radius:50%; overflow:hidden; border:2px solid #e5e7eb;">
-          <img src="somyeong.jpg" alt="Somyeong" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        
-        <h3 style="margin:0 0 5px; font-size:20px; font-weight:950;">Somyeong</h3>
-        <p style="margin:0 0 20px; font-size:13px; color:#6b7280; font-weight:700;">Partner / Editor</p>
+        <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;">
+          <a href="https://youtu.be/CVdxCVVnSbY" target="_blank" 
+             style="background:#212121; color:white; padding:8px 14px; border-radius:30px; font-size:13px; font-weight:800; display:flex; align-items:center; gap:5px; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+             <span style="color:#FF0000; font-size:16px;">▶</span> YouTube
+          </a>
+          <a href="#" target="_blank" 
+             style="background:#FF2442; color:white; padding:8px 14px; border-radius:30px; font-size:13px; font-weight:800; display:flex; align-items:center; gap:5px; box-shadow:0 4px 6px rgba(255,36,66,0.2);">
+             📕 Rednote
+          </a>
+        </div>
 
-        <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;">
-          <a href="https://youtube.com/@somyeong" target="_blank" 
-             style="background:#212121; color:white; padding:8px 14px; border-radius:30px; font-size:13px; font-weight:800; display:flex; align-items:center; gap:5px; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-             <span style="color:#FF0000; font-size:16px;">▶</span> YouTube
-          </a>
-          <a href="#" target="_blank" 
-             style="background:#FF2442; color:white; padding:8px 14px; border-radius:30px; font-size:13px; font-weight:800; display:flex; align-items:center; gap:5px; box-shadow:0 4px 6px rgba(255,36,66,0.2);">
-             📕 Rednote
-          </a>
-        </div>
+        <div style="border-top:1px solid #eee; padding-top:15px; text-align:left; font-size:14px; line-height:1.8;">
+          <div>📧 <b>Email:</b> <a href="mailto:example@gmail.com" style="text-decoration:underline;">example@gmail.com</a></div>
+          <div style="display:flex; align-items:center; gap:5px;">
+            💬 <b>WeChat:</b> wxid_kvmr0oz
+            <button onclick="openModal()" style="border:1px solid #ddd; background:white; padding:2px 6px; border-radius:4px; font-size:11px; cursor:pointer;">QR</button>
+          </div>
+        </div>
+      </div>
 
-        <div style="border-top:1px solid #eee; padding-top:15px; text-align:left; font-size:14px; line-height:1.8;">
-          <div>📧 <b>Email:</b> <a href="mailto:partner@gmail.com" style="text-decoration:underline;">partner@gmail.com</a></div>
-          <div>💬 <b>WeChat:</b> (ID 입력)</div>
-        </div>
-      </div>
+      <div class="card" style="text-align:center; padding:30px 20px;">
+        <div style="width:80px; height:80px; margin:0 auto 15px; border-radius:50%; overflow:hidden; border:2px solid #e5e7eb;">
+          <img src="somyeong.jpg" alt="Somyeong" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        
+        <h3 style="margin:0 0 5px; font-size:20px; font-weight:950;">Somyeong</h3>
+        <p style="margin:0 0 20px; font-size:13px; color:#6b7280; font-weight:700;">Partner / Editor</p>
 
-    </div>
-  </section>
+        <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;">
+          <a href="https://youtube.com/@somyeong" target="_blank" 
+             style="background:#212121; color:white; padding:8px 14px; border-radius:30px; font-size:13px; font-weight:800; display:flex; align-items:center; gap:5px; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+             <span style="color:#FF0000; font-size:16px;">▶</span> YouTube
+          </a>
+          <a href="#" target="_blank" 
+             style="background:#FF2442; color:white; padding:8px 14px; border-radius:30px; font-size:13px; font-weight:800; display:flex; align-items:center; gap:5px; box-shadow:0 4px 6px rgba(255,36,66,0.2);">
+             📕 Rednote
+          </a>
+        </div>
+
+        <div style="border-top:1px solid #eee; padding-top:15px; text-align:left; font-size:14px; line-height:1.8;">
+          <div>📧 <b>Email:</b> <a href="mailto:partner@gmail.com" style="text-decoration:underline;">partner@gmail.com</a></div>
+          <div>💬 <b>WeChat:</b> (ID 입력)</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
 </main> <footer class="wrap" style="margin-top:60px; padding-bottom:40px; text-align:center; font-size:13px; color:#999;">
-  © 2026 Dotorin & Somyeong. All rights reserved.<br>
-  Based in Korea, Creating Globally.
+  © 2026 Dotorin & Somyeong. All rights reserved.<br>
+  Based in Korea, Creating Globally.
 </footer>
-<div class="modal-backdrop" id="qrModal" onclick="if(event.target===this) closeModal()">
-  <div class="modal">
-    <div class="modal-head">
-      <span>WeChat QR Code</span>
-      <button class="close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="qr">
-        <img src="wechat_qr.jpg" alt="WeChat QR" onerror="this.parentElement.innerHTML='QR 이미지를 준비중입니다.'">
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
- <div class="modal-backdrop" id="qrModal" onclick="if(event.target===this) closeModal()">
-  <div class="modal">
-    <div class="modal-head">
-      <span>WeChat QR Code</span>
-      <button class="close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="qr">
-        <img src="wechat_qr.jpg" alt="WeChat QR" onerror="this.parentElement.innerHTML='QR 이미지를 준비중입니다.'">
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  // 1. 슬라이드쇼 통합 엔진 (상단 + 하단 모두 작동)
-  function startSlide(id, interval) {
-    const slides = document.querySelectorAll('#' + id + ' img');
-    let current = 0;
-    
-    // 사진이 있을 때만 작동
-    if(slides.length > 0) {
-      setInterval(() => {
-        slides[current].classList.remove('active'); // 현재 거 끄기
-        current = (current + 1) % slides.length; // 다음 번호로
-        slides[current].classList.add('active'); // 다음 거 켜기
-      }, interval);
-    }
-  }
-
-  // 상단 썸네일 슬라이드 (3초마다)
-  startSlide('proofSlider', 3000);
-  
-  // 하단 레퍼런스 슬라이드 (4초마다)
-  startSlide('refSlider', 4000);
-
-  // 2. 언어 변경 기능
-  function setLang(lang) {
-    // 버튼 색상 변경
-    document.querySelectorAll('.lang button').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.lang === lang);
-    });
-    // 텍스트 내용 변경
-    document.querySelectorAll('[data-kr]').forEach(el => {
-      const text = el.getAttribute('data-' + lang);
-      if(text) el.innerHTML = text;
-    });
-    // 중국어 안내 문구 제어
-    const cnNote = document.getElementById('cnNote');
-    if(cnNote) cnNote.style.display = (lang === 'cn') ? 'block' : 'none';
-  }
-
-  // 3. 모달창 열기/닫기 기능
-  function openModal() { document.getElementById('qrModal').style.display = 'flex'; }
-  function closeModal() { document.getElementById('qrModal').style.display = 'none'; }
-</script>
-
-</body>
-</html>

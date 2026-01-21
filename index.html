@@ -415,6 +415,40 @@
 }
 
 .proof-stage img.active{ opacity:1; }
+/* ===== HERO layout fix (PC/모바일 비율 통일) ===== */
+.hero{
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr; /* 좌:우 비율 */
+  gap: 24px;
+  align-items: start;
+}
+
+/* 큰 화면에서 너무 벌어지지 않게 */
+.wrap{ max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+/* 모바일에서는 1열로 */
+@media (max-width: 980px){
+  .hero{ grid-template-columns: 1fr; }
+}
+
+/* TOP PROOF 이미지 영역 고정 */
+#proofSlider{
+  width: 100%;
+  aspect-ratio: 16 / 9;      /* 핵심: PC/폰 동일한 느낌 */
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+#proofSlider img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+#proofSlider img.active{ opacity: 1; }
 
   </style>
 </head>
@@ -839,6 +873,11 @@
   </div>
 </div>
 <script>
+  // 새로고침 시 스크롤 위치 복원 방지
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('load', () => {
+  if (!location.hash) window.scrollTo(0, 0);
+});
   // 언어: data-cn이 아직 없으면 en -> kr 순으로 fallback
   function getText(el, lang){
     if(!el || !el.dataset) return null;

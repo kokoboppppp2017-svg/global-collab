@@ -8,154 +8,530 @@
     :root{
       --bg:#f5f7fb;
       --card:#ffffff;
-      --text:#1f2937;
+      --text:#111827;
       --sub:#6b7280;
       --accent:#2563eb;
       --line:#e5e7eb;
+
+      --shadow: 0 14px 40px rgba(17,24,39,.08);
+      --radius: 22px;
+      --radius2: 16px;
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
       background:var(--bg);
       color:var(--text);
     }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1200px;margin:0 auto;padding:20px}
     header{
       background:#fff;
       border-bottom:1px solid var(--line);
-      position:sticky;top:0;z-index:10;
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(180%) blur(10px);
     }
-    .wrap{max-width:1200px;margin:0 auto;padding:20px}
     .nav{
-      display:flex;align-items:center;justify-content:space-between;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;font-weight:900;
+    }
+    .brand-dot{
+      width:10px;height:10px;border-radius:999px;background:var(--accent);
+      box-shadow:0 0 0 5px rgba(37,99,235,.10);
     }
     .nav ul{
-      display:flex;gap:24px;list-style:none;padding:0;margin:0;
-      font-weight:600;color:var(--sub);
+      display:flex;gap:22px;list-style:none;padding:0;margin:0;
+      font-weight:700;color:var(--sub);
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .nav ul a{
+      padding:10px 10px;border-radius:12px;
+    }
+    .nav ul a:hover{background:#f3f4f6;color:#111827}
+    .lang{
+      display:flex;gap:8px;align-items:center;
+      background:#fff;border:1px solid var(--line);
+      padding:6px;border-radius:999px;
     }
     .lang button{
-      border:1px solid var(--line);
-      background:#fff;
-      padding:6px 10px;
-      border-radius:20px;
-      cursor:pointer;
-      font-weight:600;
+      border:0;background:transparent;
+      padding:8px 12px;border-radius:999px;
+      cursor:pointer;font-weight:800;color:var(--sub);
     }
     .lang button.active{background:var(--accent);color:#fff}
-    h1{font-size:40px;line-height:1.2;margin:20px 0}
-    .hero-sub{color:var(--sub);font-size:18px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .card{
-      background:var(--card);
-      border-radius:20px;
-      padding:24px;
-      box-shadow:0 10px 30px rgba(0,0,0,.05);
-    }
-    .profile{
-      display:flex;gap:20px;align-items:flex-start;
-    }
-    .photo{
-      width:120px;aspect-ratio:3/4;
-      background:#e5e7eb;
-      border-radius:12px;
-      display:flex;align-items:center;justify-content:center;
-      color:#9ca3af;font-weight:700;
-    }
-    .label{font-size:12px;font-weight:700;color:var(--accent)}
-    .name{font-size:18px;font-weight:800;margin:6px 0}
-    .desc{color:var(--sub);line-height:1.5}
+
+    /* HERO */
     section{margin:60px 0}
-    h2{font-size:28px;margin-bottom:16px}
-    ul{margin:0;padding-left:18px}
-    li{margin:8px 0}
+    .hero{
+      display:grid;grid-template-columns: 1.15fr .85fr;gap:24px;
+      align-items:stretch;
+    }
+    .badge{
+      display:inline-flex;gap:8px;align-items:center;
+      font-size:13px;font-weight:800;color:#374151;
+      background:#fff;border:1px solid var(--line);
+      padding:8px 12px;border-radius:999px;
+      box-shadow:0 8px 22px rgba(17,24,39,.05);
+      margin-bottom:14px;
+    }
+    h1{
+      font-size:46px;line-height:1.15;margin:10px 0 12px;
+      letter-spacing:-.02em;
+    }
+    .hero-sub{color:var(--sub);font-size:18px;line-height:1.6;margin:0 0 18px}
+    .stats{
+      display:grid;grid-template-columns: repeat(3, 1fr);
+      gap:12px;margin:18px 0 16px;
+    }
+    .stat{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 10px 26px rgba(17,24,39,.05);
+      min-height:86px;
+    }
+    .stat .big{font-size:24px;font-weight:950;margin-bottom:4px}
+    .stat .small{font-size:12px;color:var(--sub);font-weight:700}
+    .cta{
+      display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+      margin-top:10px;
+    }
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:8px;
+      padding:12px 16px;border-radius:14px;
+      font-weight:900;cursor:pointer;border:1px solid var(--line);
+      background:#fff;color:#111827;
+      box-shadow:0 12px 30px rgba(17,24,39,.06);
+      transition:.15s transform ease, .15s opacity ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      background:var(--accent);border-color:transparent;color:#fff;
+    }
+    .btn.primary:active{transform:translateY(0)}
+    .btn.secondary{background:#fff}
     .note{
-      margin-top:16px;
+      margin-top:14px;
       padding:14px 16px;
-      border-radius:12px;
+      border-radius:14px;
       background:#fff7ed;
+      border:1px solid #fed7aa;
       color:#92400e;
       font-size:14px;
-      display:none;
+      line-height:1.5;
+      display:none; /* CN에서만 */
     }
+
+    /* RIGHT PROOF CARD */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(229,231,235,.9);
+    }
+    .proof-title{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      margin-bottom:12px;
+    }
+    .proof-title h3{
+      margin:0;font-size:13px;letter-spacing:.18em;
+      color:#6b7280;font-weight:950;
+    }
+    .proof-frame{
+      border:2px dashed #e5e7eb;
+      border-radius:18px;
+      aspect-ratio: 16/10;
+      overflow:hidden;
+      background: #f9fafb;
+      display:flex;align-items:center;justify-content:center;
+      position:relative;
+    }
+    .proof-frame img{
+      width:100%;height:100%;object-fit:cover;display:block;
+    }
+    .proof-caption{
+      margin-top:12px;
+      color:var(--sub);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .chips{
+      display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;
+    }
+    .chip{
+      font-size:12px;font-weight:800;color:#374151;
+      background:#f3f4f6;border:1px solid #e5e7eb;
+      padding:8px 10px;border-radius:999px;
+    }
+    .thumbs{
+      display:flex;gap:10px;margin-top:12px;
+      overflow:auto;padding-bottom:2px;
+    }
+    .thumb{
+      width:92px;flex:0 0 92px;aspect-ratio:16/10;
+      border-radius:12px;overflow:hidden;
+      border:2px solid transparent;
+      background:#eef2ff;
+      cursor:pointer;
+      position:relative;
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb.active{border-color:var(--accent)}
+    .thumb::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.18), transparent 55%);
+      opacity:.25;
+    }
+
+    /* SECTIONS */
+    h2{
+      font-size:28px;margin:0 0 14px;
+      letter-spacing:-.01em;
+    }
+    .section-sub{color:var(--sub);margin:0 0 18px;line-height:1.6}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+    /* PROFILE CARDS */
+    .profile{
+      display:flex;gap:18px;align-items:flex-start;
+    }
+    .photo{
+      width:118px;aspect-ratio:3/4;
+      border-radius:14px;
+      background:#e5e7eb;
+      overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+      color:#9ca3af;font-weight:900;
+      border:1px solid #e5e7eb;
+      flex:0 0 auto;
+    }
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .label{
+      font-size:12px;font-weight:950;color:var(--accent);
+      letter-spacing:.08em;
+    }
+    .name{font-size:20px;font-weight:950;margin:6px 0 8px}
+    .desc{color:var(--sub);line-height:1.55;margin:0 0 10px}
+    .meta{
+      display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;
+      color:#374151;font-weight:800;font-size:13px;
+    }
+    .meta span{
+      background:#f9fafb;border:1px solid #e5e7eb;
+      padding:8px 10px;border-radius:999px;
+    }
+
+    /* LISTS */
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;line-height:1.55}
+
+    /* REFERENCE BOX */
+    .ref-box{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+    }
+    .ref-links{
+      display:flex;flex-direction:column;gap:10px;margin-top:10px;
+    }
+    .ref-links a{
+      font-weight:900;color:var(--accent);
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    .ref-links a:hover{text-decoration:underline}
+    .mini-muted{color:var(--sub);font-size:13px;line-height:1.55;margin-top:8px}
+
+    /* CONTACT */
+    .contact-actions{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;
+    }
+
+    /* MODAL */
+    .modal-backdrop{
+      position:fixed;inset:0;background:rgba(17,24,39,.55);
+      display:none;align-items:center;justify-content:center;
+      padding:18px;z-index:100;
+    }
+    .modal{
+      width:min(560px, 100%);
+      background:#fff;border-radius:18px;
+      box-shadow:0 30px 80px rgba(0,0,0,.25);
+      border:1px solid rgba(229,231,235,.9);
+      overflow:hidden;
+    }
+    .modal-head{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 16px;border-bottom:1px solid var(--line);
+      font-weight:950;
+    }
+    .modal-body{padding:16px}
+    .qr{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#f3f4f6;
+      overflow:hidden;
+    }
+    .qr img{width:100%;height:auto;display:block}
+    .close{
+      border:0;background:#f3f4f6;
+      border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:900;
+    }
+
     footer{margin:60px 0;color:var(--sub)}
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr;gap:16px}
+      h1{font-size:38px}
+      .stats{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .nav ul{display:none} /* 모바일에서는 메뉴 숨김(필요하면 햄버거로 확장 가능) */
+    }
   </style>
 </head>
 
 <body>
 <header>
   <div class="wrap nav">
-    <strong>Dotorin</strong>
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <strong>Dotorin</strong>
+    </div>
+
     <ul>
-      <li>성과</li>
-      <li>소개</li>
-      <li>제공</li>
-      <li>진행</li>
-      <li>레퍼런스</li>
-      <li>연락</li>
+      <li><a href="#proof" data-kr="성과" data-en="Proof" data-cn="成果">성과</a></li>
+      <li><a href="#who" data-kr="소개" data-en="Who" data-cn="介绍">소개</a></li>
+      <li><a href="#offer" data-kr="제공" data-en="Offer" data-cn="提供">제공</a></li>
+      <li><a href="#process" data-kr="진행" data-en="Process" data-cn="流程">진행</a></li>
+      <li><a href="#reference" data-kr="레퍼런스" data-en="Reference" data-cn="参考">레퍼런스</a></li>
+      <li><a href="#contact" data-kr="연락" data-en="Contact" data-cn="联系">연락</a></li>
     </ul>
-    <div class="lang">
-      <button class="active" onclick="setLang('kr')">KR</button>
-      <button onclick="setLang('en')">EN</button>
-      <button onclick="setLang('cn')">CN</button>
+
+    <div class="lang" aria-label="Language switch">
+      <button class="active" data-lang="kr" onclick="setLang('kr')">KR</button>
+      <button data-lang="en" onclick="setLang('en')">EN</button>
+      <button data-lang="cn" onclick="setLang('cn')">CN</button>
     </div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <!-- HERO -->
-  <section>
-    <h1 data-kr="성과와 자료로 빠르게 판단할 수 있도록 설계한,<br>트렌드를 선도하는 크리에이터 협업 페이지입니다."
+  <!-- HERO + TOP PROOF -->
+  <section class="hero" id="top">
+    <!-- LEFT -->
+    <div>
+      <div class="badge"
+           data-kr="Region-ready · Evidence-first · Mobile-friendly"
+           data-en="Region-ready · Evidence-first · Mobile-friendly"
+           data-cn="多地区适配 · 证据优先 · 移动友好">
+        Region-ready · Evidence-first · Mobile-friendly
+      </div>
+
+      <h1
+        data-kr="성과와 자료로 빠르게 판단할 수 있도록 설계한,<br>트렌드를 선도하는 크리에이터 협업 페이지입니다."
         data-en="A creator collaboration page designed for fast decisions based on results and data."
-        data-cn="基于成果与数据，帮助快速决策的趋势型创作者合作页面。">
-      성과와 자료로 빠르게 판단할 수 있도록 설계한,<br>
-      트렌드를 선도하는 크리에이터 협업 페이지입니다.
-    </h1>
-    <p class="hero-sub"
-       data-kr="감각이 아닌 수치와 증거 중심으로 설계했습니다."
-       data-en="Designed around metrics and proof, not impressions."
-       data-cn="以数据与验证材料为核心，而非主观感受。">
-      감각이 아닌 수치와 증거 중심으로 설계했습니다.
-    </p>
+        data-cn="基于成果与数据，帮助快速决策的趋势型创作者合作页面。"
+      >
+        성과와 자료로 빠르게 판단할 수 있도록 설계한,<br>
+        트렌드를 선도하는 크리에이터 협업 페이지입니다.
+      </h1>
 
-    <div class="note" id="cnNote">
-      중국 본토 등 일부 지역에서는 YouTube 접근이 제한될 수 있어,<br>
-      본 페이지는 ‘재생’이 아닌 ‘증거(캡처/수치/요약)’ 중심으로 구성되었습니다.
-    </div>
-  </section>
+      <p class="hero-sub"
+        data-kr="감각이 아닌 수치와 증거 중심으로 설계했습니다."
+        data-en="Designed around metrics and proof, not impressions."
+        data-cn="以数据与验证材料为核心，而非主观感受。"
+      >
+        감각이 아닌 수치와 증거 중심으로 설계했습니다.
+      </p>
 
-  <!-- WHO -->
-  <section>
-    <h2>소개</h2>
-    <div class="grid">
-      <div class="card">
-        <div class="profile">
-          <div class="photo">PHOTO</div>
-          <div>
-            <div class="label">MAIN CREATOR</div>
-            <div class="name">Dotorin</div>
-            <p class="desc">
-              쇼호스트·라이브커머스 진행 경험을 바탕으로,<br>
-              브랜드 포인트를 <strong>짧고 정확하게</strong> 전달합니다.<br>
-              의사결정이 쉬운 설명형 콘텐츠를 설계합니다.
-            </p>
+      <!-- 3 BOXES -->
+      <div class="stats" id="proof">
+        <div class="stat">
+          <div class="big" data-kr="230K+" data-en="230K+" data-cn="230K+">230K+</div>
+          <div class="small"
+               data-kr="대표 영상 조회수 (예시)"
+               data-en="Views on a key video (sample)"
+               data-cn="代表视频播放量（示例）">
+            대표 영상 조회수 (예시)
+          </div>
+        </div>
+        <div class="stat">
+          <div class="big" data-kr="KR / Global" data-en="KR / Global" data-cn="韩国 / 全球">KR / Global</div>
+          <div class="small"
+               data-kr="다국적 타깃 설계"
+               data-en="Multi-region targeting"
+               data-cn="多地区受众设计">
+            다국적 타깃 설계
+          </div>
+        </div>
+        <div class="stat">
+          <div class="big" data-kr="Host-style" data-en="Host-style" data-cn="主持人风格">Host-style</div>
+          <div class="small"
+               data-kr="설명형/전환형 전달"
+               data-en="Explainer that converts"
+               data-cn="讲解型 / 转化导向">
+            설명형/전환형 전달
           </div>
         </div>
       </div>
 
+      <!-- CTA -->
+      <div class="cta">
+        <a class="btn primary" href="#contact"
+           data-kr="협업 문의하기" data-en="Contact for collaboration" data-cn="合作咨询">
+          협업 문의하기
+        </a>
+        <a class="btn secondary" href="#reference"
+           data-kr="레퍼런스 보기" data-en="View references" data-cn="查看参考">
+          레퍼런스 보기
+        </a>
+      </div>
+
+      <!-- CN ONLY NOTE -->
+      <div class="note" id="cnNote"
+        data-kr=""
+        data-en=""
+        data-cn="由于在中国大陆等部分地区可能无法访问 YouTube，本页面以“证据（截图/数据/摘要）”为核心呈现，而非依赖视频播放。">
+        중국 본토 등 일부 지역에서는 YouTube 접근이 제한될 수 있어,
+        본 페이지는 ‘재생’이 아닌 ‘증거(캡처/수치/요약)’ 중심으로 구성되었습니다.
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="card">
+      <div class="proof-title">
+        <h3 data-kr="TOP PROOF" data-en="TOP PROOF" data-cn="核心证据">TOP PROOF</h3>
+      </div>
+
+      <!-- Clickable slideshow frame -->
+      <a id="proofLink" href="https://youtu.be/REPLACE_ME" target="_blank" rel="noopener">
+        <div class="proof-frame" title="Click to open">
+          <!-- 기본 이미지(없으면 회색 박스) -->
+          <img id="proofMainImg" src="assets/hero1.jpg" alt="Top proof image"
+               onerror="this.style.display='none'; this.parentElement.style.background='#f3f4f6';">
+        </div>
+      </a>
+
+      <div class="proof-caption">
+        <div
+          data-kr="콘텐츠: 대표 여행 Vlog (썸네일 캡처 넣기)"
+          data-en="Content: Key travel vlog (thumbnail capture)"
+          data-cn="内容：代表旅行 Vlog（封面截图）"
+        >
+          콘텐츠: 대표 여행 Vlog (썸네일 캡처 넣기)
+        </div>
+
+        <div class="chips" aria-label="tags">
+          <span class="chip" data-kr="#성과요약" data-en="#Summary" data-cn="#成果摘要">#성과요약</span>
+          <span class="chip" data-kr="#캡처기반" data-en="#Capture-based" data-cn="#截图佐证">#캡처기반</span>
+          <span class="chip" data-kr="#내부공유" data-en="#Internal-share" data-cn="#内部共享">#내부공유</span>
+        </div>
+
+        <div class="mini-muted"
+             data-kr="※ 수치는 예시입니다. 실제 수치로 교체하면 설득력이 급상승합니다."
+             data-en="* Numbers are samples. Replace with real metrics for stronger proof."
+             data-cn="* 数值为示例。替换为真实数据将显著提升说服力。">
+          ※ 수치는 예시입니다. 실제 수치로 교체하면 설득력이 급상승합니다.
+        </div>
+      </div>
+
+      <!-- Thumbnails -->
+      <div class="thumbs" aria-label="proof thumbnails">
+        <div class="thumb active" data-img="assets/hero1.jpg" data-link="https://youtu.be/REPLACE_ME_1" onclick="setProof(this)">
+          <img src="assets/hero1.jpg" alt="thumb1" onerror="this.style.display='none'">
+        </div>
+        <div class="thumb" data-img="assets/hero2.jpg" data-link="https://youtu.be/REPLACE_ME_2" onclick="setProof(this)">
+          <img src="assets/hero2.jpg" alt="thumb2" onerror="this.style.display='none'">
+        </div>
+        <div class="thumb" data-img="assets/hero3.jpg" data-link="https://youtu.be/REPLACE_ME_3" onclick="setProof(this)">
+          <img src="assets/hero3.jpg" alt="thumb3" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section id="who">
+    <h2 data-kr="소개" data-en="Who" data-cn="介绍">소개</h2>
+    <p class="section-sub"
+       data-kr="담당자가 ‘사람/역할’을 빠르게 이해하도록, 핵심만 카드로 정리했습니다."
+       data-en="Cards that help decision-makers understand roles quickly."
+       data-cn="用卡片快速说明角色与强项。">
+      담당자가 ‘사람/역할’을 빠르게 이해하도록, 핵심만 카드로 정리했습니다.
+    </p>
+
+    <div class="grid">
+      <!-- Dotorin -->
       <div class="card">
         <div class="profile">
-          <div class="photo">PHOTO</div>
+          <div class="photo">
+            <img src="assets/dotorin.jpg" alt="Dotorin photo"
+                 onerror="this.remove(); this.parentElement.textContent='PHOTO';">
+          </div>
           <div>
-            <div class="label">PARTNER</div>
+            <div class="label"
+                 data-kr="메인 크리에이터" data-en="MAIN CREATOR" data-cn="主创作者">
+              메인 크리에이터
+            </div>
+            <div class="name">Dotorin</div>
+            <p class="desc"
+               data-kr="쇼호스트·라이브커머스 진행 경험을 바탕으로,<br>브랜드 포인트를 <strong>짧고 정확하게</strong> 전달합니다.<br>담당자가 빠르게 판단할 수 있는 ‘설명형’ 콘텐츠를 설계합니다."
+               data-en="With live commerce hosting experience, I deliver brand points clearly and fast.<br>I design explainer content that helps decision-makers decide quickly."
+               data-cn="基于直播带货/主持经验，清晰高效传达品牌重点，并设计便于快速决策的讲解型内容。">
+              쇼호스트·라이브커머스 진행 경험을 바탕으로,<br>
+              브랜드 포인트를 <strong>짧고 정확하게</strong> 전달합니다.<br>
+              담당자가 빠르게 판단할 수 있는 ‘설명형’ 콘텐츠를 설계합니다.
+            </p>
+
+            <div class="meta">
+              <span data-kr="설명형 전달" data-en="Explainer" data-cn="讲解型">설명형 전달</span>
+              <span data-kr="전환 중심" data-en="Conversion" data-cn="转化导向">전환 중심</span>
+              <span data-kr="카드형 요약" data-en="Card summary" data-cn="卡片摘要">카드형 요약</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Somyeong -->
+      <div class="card">
+        <div class="profile">
+          <div class="photo">
+            <img src="assets/somyeong.jpg" alt="Somyeong photo"
+                 onerror="this.remove(); this.parentElement.textContent='PHOTO';">
+          </div>
+          <div>
+            <div class="label"
+                 data-kr="파트너" data-en="PARTNER" data-cn="合作伙伴">
+              파트너
+            </div>
             <div class="name">Somyeong (소먕)</div>
-            <p class="desc">
+            <p class="desc"
+               data-kr="YouTube·Rednote 기반의 트렌드 친화적 영상 제작을 강점으로 하며,<br>동시 노출 시 확산 시너지를 만듭니다."
+               data-en="Strong at trend-friendly video production across YouTube and Rednote.<br>Creates amplification synergy through dual exposure."
+               data-cn="擅长 YouTube/小红书趋势向视频制作，通过双平台曝光形成扩散协同。">
               YouTube·Rednote 기반의 트렌드 친화적 영상 제작을 강점으로 하며,<br>
               동시 노출 시 확산 시너지를 만듭니다.
             </p>
-            <p class="desc">
-              YouTube / Rednote : Somyeong_143
-            </p>
+
+            <div class="meta">
+              <span data-kr="YouTube" data-en="YouTube" data-cn="YouTube">YouTube</span>
+              <span data-kr="Rednote" data-en="Rednote" data-cn="小红书">Rednote</span>
+              <span data-kr="트렌드 편집" data-en="Trend edit" data-cn="趋势剪辑">트렌드 편집</span>
+            </div>
+
+            <div class="mini-muted" style="margin-top:10px;font-weight:900;color:#374151">
+              <span data-kr="핸들:" data-en="Handle:" data-cn="账号：">핸들:</span>
+              YouTube / Rednote : <span style="font-weight:950">Somyeong_143</span>
+            </div>
           </div>
         </div>
       </div>
@@ -163,41 +539,209 @@
   </section>
 
   <!-- OFFER -->
-  <section>
-    <h2>제공 결과물</h2>
+  <section id="offer">
+    <h2 data-kr="제공" data-en="Offer" data-cn="提供">제공</h2>
+    <p class="section-sub"
+       data-kr="‘영상 1개’가 아니라, 검토/보고/내부 공유까지 이어지는 결과물 패키지로 제공합니다."
+       data-en="Not just a video—deliverables packaged for review, reporting, and internal sharing."
+       data-cn="不仅是视频，更提供便于审核/汇报/内部共享的结果包。">
+      ‘영상 1개’가 아니라, 검토/보고/내부 공유까지 이어지는 결과물 패키지로 제공합니다.
+    </p>
+
     <div class="grid">
       <div class="card">
+        <h3 style="margin:0 0 10px;font-size:16px;font-weight:950"
+            data-kr="제공 결과물" data-en="Deliverables" data-cn="交付内容">제공 결과물</h3>
         <ul>
-          <li>내부 공유용 성과 요약 카드 (조회수·국가·체류시간)</li>
-          <li>캡처 기반 검증 자료 (썸네일·반응·핵심 장면)</li>
-          <li>YouTube(KR/Global) · Rednote 확장 가능 콘텐츠</li>
-          <li>브랜드/공간이 기억되는 스토리 구조</li>
+          <li data-kr="내부 공유용 성과 요약 카드 (조회수·국가·체류시간)"
+              data-en="Internal-ready result cards (views, countries, watch time)"
+              data-cn="内部共享成果卡（播放量/地区/观看时长）">
+            내부 공유용 성과 요약 카드 (조회수·국가·체류시간)
+          </li>
+          <li data-kr="캡처 기반 검증 자료 (썸네일·반응·핵심 장면)"
+              data-en="Capture-based proof (thumbnail, reactions, key scenes)"
+              data-cn="截图佐证（封面/反馈/关键画面）">
+            캡처 기반 검증 자료 (썸네일·반응·핵심 장면)
+          </li>
+          <li data-kr="YouTube(KR/Global) · Rednote 확장 가능 콘텐츠"
+              data-en="Content extensible to YouTube (KR/Global) and Rednote"
+              data-cn="可扩展至 YouTube（韩/全球）与小红书的内容">
+            YouTube(KR/Global) · Rednote 확장 가능 콘텐츠
+          </li>
+          <li data-kr="브랜드/공간이 기억되는 스토리 구조"
+              data-en="A story structure that makes the brand/place memorable"
+              data-cn="让品牌/空间更易被记住的叙事结构">
+            브랜드/공간이 기억되는 스토리 구조
+          </li>
         </ul>
       </div>
+
       <div class="card">
+        <h3 style="margin:0 0 10px;font-size:16px;font-weight:950"
+            data-kr="왜 유리한가" data-en="Why it wins" data-cn="优势">왜 유리한가</h3>
         <ul>
-          <li>재생 제한 환경에서도 검토 가능한 구성</li>
-          <li>보고·결재에 바로 쓰는 자료형 결과물</li>
-          <li>단발 노출이 아닌 재사용 가능한 자산</li>
+          <li data-kr="재생 제한 환경에서도 검토 가능한 구성"
+              data-en="Reviewable even in restricted playback environments"
+              data-cn="即使播放受限也可审核的呈现方式">
+            재생 제한 환경에서도 검토 가능한 구성
+          </li>
+          <li data-kr="보고·결재에 바로 쓰는 자료형 결과물"
+              data-en="Decision-ready materials for reporting and approval"
+              data-cn="可直接用于汇报/审批的材料型结果">
+            보고·결재에 바로 쓰는 자료형 결과물
+          </li>
+          <li data-kr="단발 노출이 아닌 재사용 가능한 자산"
+              data-en="Reusable assets, not one-off exposure"
+              data-cn="可复用资产，而非一次性曝光">
+            단발 노출이 아닌 재사용 가능한 자산
+          </li>
+        </ul>
+
+        <div class="chips" style="margin-top:14px">
+          <span class="chip" data-kr="#검토친화" data-en="#Review-friendly" data-cn="#便于审核">#검토친화</span>
+          <span class="chip" data-kr="#보고용" data-en="#Report-ready" data-cn="#可汇报">#보고용</span>
+          <span class="chip" data-kr="#재사용" data-en="#Reusable" data-cn="#可复用">#재사용</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <h2 data-kr="진행" data-en="Process" data-cn="流程">진행</h2>
+    <p class="section-sub"
+       data-kr="협업 방식은 단순하고 명확하게 진행합니다."
+       data-en="A simple, clear collaboration process."
+       data-cn="合作流程简洁清晰。">
+      협업 방식은 단순하고 명확하게 진행합니다.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3 style="margin:0 0 10px;font-size:16px;font-weight:950"
+            data-kr="1) 협의" data-en="1) Align" data-cn="1) 对齐">1) 협의</h3>
+        <ul>
+          <li data-kr="제공 범위 확인 (숙박/식사/체험 등)"
+              data-en="Confirm scope (stay/meal/experience, etc.)"
+              data-cn="确认合作范围（住宿/餐饮/体验等）">
+            제공 범위 확인 (숙박/식사/체험 등)
+          </li>
+          <li data-kr="핵심 포인트 합의 (메뉴/공간/타깃/브랜드 메시지)"
+              data-en="Agree on key points (menu/space/target/message)"
+              data-cn="对齐核心重点（菜品/空间/受众/品牌信息）">
+            핵심 포인트 합의 (메뉴/공간/타깃/브랜드 메시지)
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0 0 10px;font-size:16px;font-weight:950"
+            data-kr="2) 제작 & 제공" data-en="2) Produce & deliver" data-cn="2) 制作与交付">2) 제작 & 제공</h3>
+        <ul>
+          <li data-kr="촬영/편집 (필요 시 초안 공유)"
+              data-en="Shoot/edit (draft sharing if needed)"
+              data-cn="拍摄/剪辑（如需可分享初稿）">
+            촬영/편집 (필요 시 초안 공유)
+          </li>
+          <li data-kr="업로드/배포 + 성과/캡처 기반 ‘증거 카드’ 제공"
+              data-en="Publish + provide proof cards (metrics & captures)"
+              data-cn="发布 + 提供证据卡（数据&截图）">
+            업로드/배포 + 성과/캡처 기반 ‘증거 카드’ 제공
+          </li>
         </ul>
       </div>
     </div>
   </section>
 
   <!-- REFERENCE -->
-  <section>
-    <h2>레퍼런스</h2>
+  <section id="reference">
+    <h2 data-kr="레퍼런스" data-en="Reference" data-cn="参考">레퍼런스</h2>
+    <p class="section-sub"
+       data-kr="담당자가 빠르게 확인할 수 있도록 핵심만 정리합니다."
+       data-en="Key references in one place for quick review."
+       data-cn="将关键参考集中，便于快速查看。">
+      담당자가 빠르게 확인할 수 있도록 핵심만 정리합니다.
+    </p>
+
     <div class="card">
-      글로벌 시청자 분포, 평균 시청 지속 시간 등<br>
-      실제 콘텐츠 성과 캡처 자료 제공 가능
+      <div class="ref-box">
+        <div style="flex:1">
+          <div style="font-weight:950;font-size:16px;margin-bottom:6px"
+               data-kr="증거 자료 예시" data-en="Examples of proof" data-cn="证据示例">
+            증거 자료 예시
+          </div>
+          <div class="mini-muted"
+               data-kr="글로벌 시청자 분포, 평균 시청 지속 시간 등 실제 콘텐츠 성과 캡처 자료 제공 가능"
+               data-en="Screenshots of audience geography, average view duration, etc. can be provided."
+               data-cn="可提供受众地域分布、平均观看时长等数据截图。">
+            글로벌 시청자 분포, 평균 시청 지속 시간 등 실제 콘텐츠 성과 캡처 자료 제공 가능
+          </div>
+
+          <div class="ref-links">
+            <!-- 링크는 너가 나중에 실제로 교체 -->
+            <a href="https://youtu.be/REPLACE_DOTORIN" target="_blank" rel="noopener">
+              <span data-kr="Dotorin YouTube 링크" data-en="Dotorin YouTube" data-cn="Dotorin YouTube">Dotorin YouTube 링크</span>
+            </a>
+            <a href="https://youtube.com/REPLACE_SOMYEONG" target="_blank" rel="noopener">
+              <span data-kr="Somyeong YouTube 링크" data-en="Somyeong YouTube" data-cn="Somyeong YouTube">Somyeong YouTube 링크</span>
+            </a>
+          </div>
+
+          <div class="mini-muted" style="margin-top:12px"
+               data-kr="아래 영역에 유튜브 애널리틱스 캡처(국가별/시청시간) 이미지도 넣을 수 있어요."
+               data-en="You can place analytics screenshots (by country/watch time) below."
+               data-cn="可在下方放置分析截图（国家/观看时长）。">
+            아래 영역에 유튜브 애널리틱스 캡처(국가별/시청시간) 이미지도 넣을 수 있어요.
+          </div>
+        </div>
+
+        <div style="width:340px;max-width:100%">
+          <div class="proof-frame" style="aspect-ratio:16/10;border-style:solid;border-width:1px">
+            <img src="assets/analytics-sample.jpg" alt="Analytics screenshot"
+                 onerror="this.style.display='none'; this.parentElement.style.background='#f3f4f6'; this.parentElement.innerHTML='<div style=&quot;color:#6b7280;font-weight:900&quot;>Analytics 캡처 넣기</div>';">
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section>
-    <h2>연락</h2>
+  <section id="contact">
+    <h2 data-kr="연락" data-en="Contact" data-cn="联系">연락</h2>
+    <p class="section-sub"
+       data-kr="메일/위챗 등 편한 채널로 연락 주세요."
+       data-en="Reach out via email or WeChat—whatever is easiest."
+       data-cn="可通过邮件或微信联系。">
+      메일/위챗 등 편한 채널로 연락 주세요.
+    </p>
+
     <div class="card">
-      Email / WeChat 등 편한 채널로 연락 주세요.
+      <div style="font-weight:900;color:#374151"
+           data-kr="빠른 회신을 위해, 일정/희망 제공 범위를 함께 주시면 좋아요."
+           data-en="For a faster reply, include dates and desired scope."
+           data-cn="为便于快速回复，请附上日期与合作范围。">
+        빠른 회신을 위해, 일정/희망 제공 범위를 함께 주시면 좋아요.
+      </div>
+
+      <div class="contact-actions">
+        <!-- 메일 주소 교체 -->
+        <a class="btn primary" href="mailto:REPLACE_EMAIL@example.com"
+           data-kr="Email 보내기" data-en="Send Email" data-cn="发送邮件">
+          Email 보내기
+        </a>
+        <button class="btn secondary" type="button" onclick="openModal()"
+                data-kr="WeChat QR 보기" data-en="View WeChat QR" data-cn="查看微信二维码">
+          WeChat QR 보기
+        </button>
+      </div>
+
+      <div class="mini-muted" style="margin-top:12px">
+        <span data-kr="* CN 환경에서는 YouTube 링크가 제한될 수 있어 캡처/수치 기반 자료로도 제공 가능합니다."
+              data-en="* In CN environments, YouTube may be restricted—proof kits (captures/metrics) are available."
+              data-cn="* 在 CN 环境可能无法访问 YouTube，可提供截图/数据型证据包。">
+          * CN 환경에서는 YouTube 링크가 제한될 수 있어 캡처/수치 기반 자료로도 제공 가능합니다.
+        </span>
+      </div>
     </div>
   </section>
 
@@ -207,15 +751,102 @@
   © Dotorin
 </footer>
 
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="WeChat QR">
+  <div class="modal">
+    <div class="modal-head">
+      <span data-kr="WeChat QR" data-en="WeChat QR" data-cn="微信二维码">WeChat QR</span>
+      <button class="close" onclick="closeModal()">닫기</button>
+    </div>
+    <div class="modal-body">
+      <div class="qr">
+        <img src="assets/wechat-qr.png" alt="WeChat QR"
+             onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=&quot;padding:18px;color:#6b7280;font-weight:900&quot;>assets/wechat-qr.png 업로드 후 표시됩니다</div>';">
+      </div>
+      <div class="mini-muted" style="margin-top:10px"
+           data-kr="QR 이미지를 assets/wechat-qr.png로 올리면 자동으로 표시됩니다."
+           data-en="Upload the QR image as assets/wechat-qr.png to display it."
+           data-cn="将二维码图片上传为 assets/wechat-qr.png 即可显示。">
+        QR 이미지를 assets/wechat-qr.png로 올리면 자동으로 표시됩니다.
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  function setLang(lang){
-    document.querySelectorAll('[data-kr]').forEach(el=>{
-      el.innerHTML = el.dataset[lang];
-    });
-    document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('active'));
-    document.querySelector(`.lang button[onclick="setLang('${lang}')"]`).classList.add('active');
-    document.getElementById('cnNote').style.display = (lang==='cn')?'block':'none';
+  // 언어: data-cn이 아직 없으면 en -> kr 순으로 fallback
+  function getText(el, lang){
+    if(!el || !el.dataset) return null;
+    const direct = el.dataset[lang];
+    if(direct && direct.trim() !== "") return direct;
+    const en = el.dataset.en;
+    if(en && en.trim() !== "") return en;
+    const kr = el.dataset.kr;
+    if(kr && kr.trim() !== "") return kr;
+    return null;
   }
+
+  function setLang(lang){
+    document.querySelectorAll('[data-kr],[data-en],[data-cn]').forEach(el=>{
+      const t = getText(el, lang);
+      if(t !== null) el.innerHTML = t;
+    });
+
+    document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('active'));
+    const btn = document.querySelector(`.lang button[data-lang="${lang}"]`);
+    if(btn) btn.classList.add('active');
+
+    // CN note only
+    const cnNote = document.getElementById('cnNote');
+    if(cnNote) cnNote.style.display = (lang === 'cn') ? 'block' : 'none';
+  }
+
+  // TOP PROOF thumbnail switching
+  function setProof(el){
+    document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+    const img = el.getAttribute('data-img');
+    const link = el.getAttribute('data-link');
+
+    const main = document.getElementById('proofMainImg');
+    const a = document.getElementById('proofLink');
+    if(main && img) { main.src = img; main.style.display='block'; }
+    if(a && link) a.href = link;
+  }
+
+  // auto slideshow (optional)
+  let slideTimer = null;
+  function startSlideshow(){
+    const thumbs = Array.from(document.querySelectorAll('.thumb'));
+    if(thumbs.length <= 1) return;
+    let idx = thumbs.findIndex(t=>t.classList.contains('active'));
+    if(idx < 0) idx = 0;
+    slideTimer = setInterval(()=>{
+      idx = (idx + 1) % thumbs.length;
+      setProof(thumbs[idx]);
+    }, 4500);
+  }
+  function stopSlideshow(){
+    if(slideTimer) clearInterval(slideTimer);
+  }
+
+  // Modal
+  function openModal(){
+    document.getElementById('modalBackdrop').style.display = 'flex';
+  }
+  function closeModal(){
+    document.getElementById('modalBackdrop').style.display = 'none';
+  }
+  document.getElementById('modalBackdrop').addEventListener('click', (e)=>{
+    if(e.target.id === 'modalBackdrop') closeModal();
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') closeModal();
+  });
+
+  // init
+  setLang('kr');
+  startSlideshow();
 </script>
 </body>
 </html>

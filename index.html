@@ -127,9 +127,11 @@
         <a href="#contact">Contact</a>
       </div>
       <div class="lang">
-        <button class="chip active" id="langKR">KR</button>
-        <button class="chip" id="langEN">EN</button>
-      </div>
+       <div class="lang">
+  <button class="chip active" id="langKR">KR</button>
+  <button class="chip" id="langEN">EN</button>
+  <button class="chip" id="langCN" title="준비중">CN</button>
+</div>
     </div>
   </div>
 
@@ -328,26 +330,40 @@
     <div class="footer">© Dotorin · Global Collaboration Page</div>
   </main>
 
-  <script>
-    const KR = document.getElementById('langKR');
-    const EN = document.getElementById('langEN');
-    const els = [...document.querySelectorAll('[data-kr]')];
+<script>
+  const KR = document.getElementById('langKR');
+  const EN = document.getElementById('langEN');
+  const CN = document.getElementById('langCN');
+  const els = [...document.querySelectorAll('[data-kr]')];
 
-    function setLang(lang){
-      els.forEach(el=>{
-        el.textContent = el.getAttribute(lang === 'KR' ? 'data-kr' : 'data-en');
-      });
-      if(lang === 'KR'){
-        KR.classList.add('active'); EN.classList.remove('active');
-        document.documentElement.lang = 'ko';
-      }else{
-        EN.classList.add('active'); KR.classList.remove('active');
-        document.documentElement.lang = 'en';
-      }
-    }
+  function setLang(lang){
+    els.forEach(el=>{
+      const attr =
+        lang === 'KR' ? 'data-kr' :
+        lang === 'EN' ? 'data-en' :
+        'data-cn';
 
-    KR.addEventListener('click', ()=>setLang('KR'));
-    EN.addEventListener('click', ()=>setLang('EN'));
-  </script>
+      // 아직 data-cn 없는 요소가 많을 수 있어서 fallback 처리
+      el.textContent = el.getAttribute(attr) || el.getAttribute('data-kr') || el.textContent;
+    });
+
+    KR.classList.toggle('active', lang === 'KR');
+    EN.classList.toggle('active', lang === 'EN');
+    CN.classList.toggle('active', lang === 'CN');
+
+    document.documentElement.lang =
+      lang === 'KR' ? 'ko' :
+      lang === 'EN' ? 'en' :
+      'zh-CN';
+  }
+
+  KR.addEventListener('click', ()=>setLang('KR'));
+  EN.addEventListener('click', ()=>setLang('EN'));
+
+  // CN은 버튼만 만들어두고, 아직 번역 전이라 안내만
+  CN.addEventListener('click', ()=>{
+    alert('CN 버전은 한국어 완성 후 번역 적용 예정입니다 :)');
+  });
+</script>
 </body>
 </html>

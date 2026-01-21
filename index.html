@@ -3,219 +3,218 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dotorin | Global Collaboration Page</title>
+  <title>Dotorin | Creator Collaboration Page</title>
+
   <style>
-    :root{
-      --bg:#f5f7fb;
-      --card:#ffffff;
-      --text:#1f2937;
-      --sub:#6b7280;
-      --accent:#2563eb;
-      --line:#e5e7eb;
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f6f7fb;
+      color: #111;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-      background:var(--bg);
-      color:var(--text);
+
+    header {
+      background: #fff;
+      padding: 18px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
     }
-    header{
-      background:#fff;
-      border-bottom:1px solid var(--line);
-      position:sticky;top:0;z-index:10;
+
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: #2563eb;
     }
-    .wrap{max-width:1200px;margin:0 auto;padding:20px}
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;
+
+    .lang button {
+      margin-left: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      background: #fff;
+      cursor: pointer;
+      font-weight: 600;
     }
-    .nav ul{
-      display:flex;gap:24px;list-style:none;padding:0;margin:0;
-      font-weight:600;color:var(--sub);
+
+    .lang button.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
     }
-    .lang button{
-      border:1px solid var(--line);
-      background:#fff;
-      padding:6px 10px;
-      border-radius:20px;
-      cursor:pointer;
-      font-weight:600;
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
-    .lang button.active{background:var(--accent);color:#fff}
-    h1{font-size:40px;line-height:1.2;margin:20px 0}
-    .hero-sub{color:var(--sub);font-size:18px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .card{
-      background:var(--card);
-      border-radius:20px;
-      padding:24px;
-      box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+    .hero {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 40px;
+      align-items: start;
     }
-    .profile{
-      display:flex;gap:20px;align-items:flex-start;
+
+    .profiles {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
-    .photo{
-      width:120px;aspect-ratio:3/4;
-      background:#e5e7eb;
-      border-radius:12px;
-      display:flex;align-items:center;justify-content:center;
-      color:#9ca3af;font-weight:700;
+
+    .profile-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+      text-align: center;
     }
-    .label{font-size:12px;font-weight:700;color:var(--accent)}
-    .name{font-size:18px;font-weight:800;margin:6px 0}
-    .desc{color:var(--sub);line-height:1.5}
-    section{margin:60px 0}
-    h2{font-size:28px;margin-bottom:16px}
-    ul{margin:0;padding-left:18px}
-    li{margin:8px 0}
-    .note{
-      margin-top:16px;
-      padding:14px 16px;
-      border-radius:12px;
-      background:#fff7ed;
-      color:#92400e;
-      font-size:14px;
-      display:none;
+
+    .profile-card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
     }
-    footer{margin:60px 0;color:var(--sub)}
+
+    .profile-card h4 {
+      margin: 6px 0 2px;
+      font-size: 15px;
+    }
+
+    .profile-card p {
+      margin: 0;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .profile-links a {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 12px;
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .hero-text span {
+      display: inline-block;
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .hero-text h1 {
+      font-size: 40px;
+      margin: 10px 0;
+      line-height: 1.2;
+    }
+
+    .hero-text p {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.6;
+      max-width: 620px;
+    }
+
+    .note {
+      margin-top: 24px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #9a3412;
+      font-size: 14px;
+      display: none;
+    }
   </style>
 </head>
 
 <body>
+
 <header>
-  <div class="wrap nav">
-    <strong>Dotorin</strong>
-    <ul>
-      <li>성과</li>
-      <li>소개</li>
-      <li>제공</li>
-      <li>진행</li>
-      <li>레퍼런스</li>
-      <li>연락</li>
-    </ul>
-    <div class="lang">
-      <button class="active" onclick="setLang('kr')">KR</button>
-      <button onclick="setLang('en')">EN</button>
-      <button onclick="setLang('cn')">CN</button>
-    </div>
+  <div class="logo">● Dotorin</div>
+  <div class="lang">
+    <button class="active" onclick="setLang('kr')">KR</button>
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('cn')">CN</button>
   </div>
 </header>
 
-<main class="wrap">
+<div class="container">
+  <section class="hero">
 
-  <!-- HERO -->
-  <section>
-    <h1 data-kr="성과와 자료로 빠르게 판단할 수 있도록 설계한,<br>트렌드를 선도하는 크리에이터 협업 페이지입니다."
-        data-en="A creator collaboration page designed for fast decisions based on results and data."
-        data-cn="基于成果与数据，帮助快速决策的趋势型创作者合作页面。">
-      성과와 자료로 빠르게 판단할 수 있도록 설계한,<br>
-      트렌드를 선도하는 크리에이터 협업 페이지입니다.
-    </h1>
-    <p class="hero-sub"
-       data-kr="감각이 아닌 수치와 증거 중심으로 설계했습니다."
-       data-en="Designed around metrics and proof, not impressions."
-       data-cn="以数据与验证材料为核心，而非主观感受。">
-      감각이 아닌 수치와 증거 중심으로 설계했습니다.
-    </p>
-
-    <div class="note" id="cnNote">
-      중국 본토 등 일부 지역에서는 YouTube 접근이 제한될 수 있어,<br>
-      본 페이지는 ‘재생’이 아닌 ‘증거(캡처/수치/요약)’ 중심으로 구성되었습니다.
-    </div>
-  </section>
-
-  <!-- WHO -->
-  <section>
-    <h2>소개</h2>
-    <div class="grid">
-      <div class="card">
-        <div class="profile">
-          <div class="photo">PHOTO</div>
-          <div>
-            <div class="label">MAIN CREATOR</div>
-            <div class="name">Dotorin</div>
-            <p class="desc">
-              쇼호스트·라이브커머스 진행 경험을 바탕으로,<br>
-              브랜드 포인트를 <strong>짧고 정확하게</strong> 전달합니다.<br>
-              의사결정이 쉬운 설명형 콘텐츠를 설계합니다.
-            </p>
-          </div>
-        </div>
+    <!-- 프로필 영역 -->
+    <div class="profiles">
+      <div class="profile-card">
+        <img src="dotorin.jpg" alt="Dotorin">
+        <h4>Dotorin</h4>
+        <p>
+          쇼호스트·라이브커머스 경험 기반<br/>
+          설명형 콘텐츠 설계
+        </p>
       </div>
 
-      <div class="card">
-        <div class="profile">
-          <div class="photo">PHOTO</div>
-          <div>
-            <div class="label">PARTNER</div>
-            <div class="name">Somyeong (소먕)</div>
-            <p class="desc">
-              YouTube·Rednote 기반의 트렌드 친화적 영상 제작을 강점으로 하며,<br>
-              동시 노출 시 확산 시너지를 만듭니다.
-            </p>
-            <p class="desc">
-              YouTube / Rednote : Somyeong_143
-            </p>
-          </div>
+      <div class="profile-card">
+        <img src="somyeong.jpg" alt="Somyeong">
+        <h4>Somyeong</h4>
+        <p>
+          트렌드 친화적 영상 제작<br/>
+          동시 노출 확산 시너지
+        </p>
+        <div class="profile-links">
+          <a href="#" target="_blank">YouTube</a> ·
+          <a href="#" target="_blank">Rednote</a>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- OFFER -->
-  <section>
-    <h2>제공 결과물</h2>
-    <div class="grid">
-      <div class="card">
-        <ul>
-          <li>내부 공유용 성과 요약 카드 (조회수·국가·체류시간)</li>
-          <li>캡처 기반 검증 자료 (썸네일·반응·핵심 장면)</li>
-          <li>YouTube(KR/Global) · Rednote 확장 가능 콘텐츠</li>
-          <li>브랜드/공간이 기억되는 스토리 구조</li>
-        </ul>
+    <!-- 메인 텍스트 -->
+    <div class="hero-text">
+      <span>Region-ready · Evidence-first · Mobile-friendly</span>
+
+      <h1 data-kr="결과를 설계하는 크리에이터 협업 페이지"
+          data-en="A Creator Collaboration Page Designed for Results"
+          data-cn="以结果为核心设计的创作者合作页面">
+        결과를 설계하는 크리에이터 협업 페이지
+      </h1>
+
+      <p data-kr="성과와 자료로 판단할 수 있도록 설계한, 트렌드를 선도하는 크리에이터 협업 페이지입니다."
+         data-en="This collaboration page is designed so decision-makers can evaluate performance through clear results and materials."
+         data-cn="本合作页面以成果与资料为核心，让决策者能够快速判断合作价值。">
+        성과와 자료로 판단할 수 있도록 설계한,
+        트렌드를 선도하는 크리에이터 협업 페이지입니다.
+      </p>
+
+      <div class="note" id="cn-note">
+        중국 본토 등 일부 지역에서는 YouTube 접근이 제한될 수 있어,
+        본 페이지는 ‘재생’이 아닌 ‘증거(캡처/수치/요약)’ 중심으로 구성했습니다.
       </div>
-      <div class="card">
-        <ul>
-          <li>재생 제한 환경에서도 검토 가능한 구성</li>
-          <li>보고·결재에 바로 쓰는 자료형 결과물</li>
-          <li>단발 노출이 아닌 재사용 가능한 자산</li>
-        </ul>
-      </div>
     </div>
+
   </section>
-
-  <!-- REFERENCE -->
-  <section>
-    <h2>레퍼런스</h2>
-    <div class="card">
-      글로벌 시청자 분포, 평균 시청 지속 시간 등<br>
-      실제 콘텐츠 성과 캡처 자료 제공 가능
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section>
-    <h2>연락</h2>
-    <div class="card">
-      Email / WeChat 등 편한 채널로 연락 주세요.
-    </div>
-  </section>
-
-</main>
-
-<footer class="wrap">
-  © Dotorin
-</footer>
+</div>
 
 <script>
-  function setLang(lang){
-    document.querySelectorAll('[data-kr]').forEach(el=>{
-      el.innerHTML = el.dataset[lang];
+  function setLang(lang) {
+    document.querySelectorAll("[data-kr]").forEach(el => {
+      el.textContent = el.dataset[lang];
     });
-    document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('active'));
-    document.querySelector(`.lang button[onclick="setLang('${lang}')"]`).classList.add('active');
-    document.getElementById('cnNote').style.display = (lang==='cn')?'block':'none';
+
+    document.querySelectorAll(".lang button").forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    document.querySelector(`.lang button[onclick="setLang('${lang}')"]`).classList.add("active");
+
+    document.getElementById("cn-note").style.display = (lang === "cn") ? "block" : "none";
   }
 </script>
+
 </body>
 </html>

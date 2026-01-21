@@ -146,21 +146,37 @@
       position:relative;
     }
 
-    #proofSlider{
-      position:relative;
-      width:100%;
-      height:100%;
+    /* [수정] 슬라이드 기능 (상단 + 레퍼런스 공통 적용) */
+    #proofSlider, #refSlider {
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
-    #proofSlider img{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      opacity:0;
-      transition:opacity .45s ease;
+
+    #proofSlider img, #refSlider img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity .45s ease;
     }
-    #proofSlider img.active{opacity:1}
+
+    /* 상단 슬라이드는 꽉 채우기 (Cover) */
+    #proofSlider img {
+      object-fit: cover;
+    }
+
+    /* 레퍼런스 슬라이드는 글씨 안 짤리게 다 보여주기 (Contain) */
+    #refSlider img {
+      object-fit: contain;
+      background: white;
+    }
+
+    /* 활성화된 이미지 보이기 */
+    #proofSlider img.active, #refSlider img.active {
+      opacity: 1;
+    }
 
     .proof-meta{
       margin-top:14px;
@@ -539,39 +555,27 @@
  <section id="reference">
     <h2 data-kr="레퍼런스" data-en="Reference" data-cn="参考资料">레퍼런스</h2>
     <p class="section-sub"
-       data-kr="말로만 하지 않습니다. 숫자가 증명하는 데이터입니다."
-       data-en="Data speaks louder than words."
-       data-cn="不只是口头承诺，用数据证明实力。">
-      말로만 하지 않습니다. 숫자가 증명하는 데이터입니다.
+       data-kr="숫자로 증명하는 데이터와 준비된 글로벌 환경입니다."
+       data-en="Data-backed proof and global-ready environment."
+       data-cn="用数据证明实力，已备好全球化环境。">
+      숫자로 증명하는 데이터와 준비된 글로벌 환경입니다.
     </p>
 
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+    <div class="card" style="padding:15px; max-width:600px; margin:0 auto;">
+      <div style="font-weight:950; margin-bottom:10px; font-size:15px;">📊 Global Proof & Specs</div>
       
-      <div class="card" style="padding:15px;">
-        <div style="font-weight:950; margin-bottom:10px; font-size:15px;">📊 Global Audience</div>
-        <div class="proof-frame">
-          <img src="analytics_proof.jpg" alt="Analytics" 
-               style="width:100%; height:100%; object-fit:contain; background:white;">
-        </div>
-        <div class="mini-muted" style="margin-top:10px;">
-          한국(26%) 외 중화권·영어권 시청자 보유
+      <div class="proof-frame" style="height:350px;"> <div id="refSlider">
+          <img class="active" src="analytics_proof.jpg" alt="Analytics">
+          <img src="subtitle_proof.jpg" alt="Subtitles">
         </div>
       </div>
 
-      <div class="card" style="padding:15px;">
-        <div style="font-weight:950; margin-bottom:10px; font-size:15px;">💬 Real Engagement</div>
-        <div class="proof-frame">
-          <img src="https://via.placeholder.com/600x400?text=Comming+Soon" alt="Comments" 
-               style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="mini-muted" style="margin-top:10px;">
-          실제 시청자들의 긍정적인 반응 및 댓글
-        </div>
+      <div class="mini-muted" style="margin-top:10px; text-align:center;">
+        <span style="color:#2563eb; font-weight:bold;">Automatic Slide</span><br>
+        글로벌 시청자 통계 & 10개국어 자막 지원
       </div>
-
     </div>
   </section>
-
   <section id="contact">
     <h2 data-kr="Contact & Profile" data-en="Contact & Profile" data-cn="联系方式">Contact & Profile</h2>
     <p class="section-sub"
@@ -658,45 +662,61 @@
 </div>
 
 <script>
-  // 1. 슬라이드쇼 자동 재생 (3초마다 변경)
-  const slides = document.querySelectorAll('#proofSlider img');
-  let currentSlide = 0;
+ <div class="modal-backdrop" id="qrModal" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <span>WeChat QR Code</span>
+      <button class="close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="qr">
+        <img src="wechat_qr.jpg" alt="WeChat QR" onerror="this.parentElement.innerHTML='QR 이미지를 준비중입니다.'">
+      </div>
+    </div>
+  </div>
+</div>
 
-  if(slides.length > 0) {
-    setInterval(() => {
-      slides[currentSlide].classList.remove('active'); // 현재 거 끄고
-      currentSlide = (currentSlide + 1) % slides.length; // 다음 번호로 넘기기
-      slides[currentSlide].classList.add('active'); // 다음 거 켜기
-    }, 3000); // 3000ms = 3초
+<script>
+  // 1. 슬라이드쇼 통합 엔진 (상단 + 하단 모두 작동)
+  function startSlide(id, interval) {
+    const slides = document.querySelectorAll('#' + id + ' img');
+    let current = 0;
+    
+    // 사진이 있을 때만 작동
+    if(slides.length > 0) {
+      setInterval(() => {
+        slides[current].classList.remove('active'); // 현재 거 끄기
+        current = (current + 1) % slides.length; // 다음 번호로
+        slides[current].classList.add('active'); // 다음 거 켜기
+      }, interval);
+    }
   }
 
-  // 2. 언어 변경 기능 (KR / EN / CN)
+  // 상단 썸네일 슬라이드 (3초마다)
+  startSlide('proofSlider', 3000);
+  
+  // 하단 레퍼런스 슬라이드 (4초마다)
+  startSlide('refSlider', 4000);
+
+  // 2. 언어 변경 기능
   function setLang(lang) {
     // 버튼 색상 변경
     document.querySelectorAll('.lang button').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
-
     // 텍스트 내용 변경
     document.querySelectorAll('[data-kr]').forEach(el => {
       const text = el.getAttribute('data-' + lang);
-      if(text) el.innerHTML = text; // 태그 안의 내용 교체
+      if(text) el.innerHTML = text;
     });
-
-    // 중국어 선택 시 경고 문구(Note) 보이기
+    // 중국어 안내 문구 제어
     const cnNote = document.getElementById('cnNote');
-    if(cnNote) {
-      cnNote.style.display = (lang === 'cn') ? 'block' : 'none';
-    }
+    if(cnNote) cnNote.style.display = (lang === 'cn') ? 'block' : 'none';
   }
 
-  // 3. 모달창 열기/닫기
-  function openModal() {
-    document.getElementById('qrModal').style.display = 'flex';
-  }
-  function closeModal() {
-    document.getElementById('qrModal').style.display = 'none';
-  }
+  // 3. 모달창 열기/닫기 기능
+  function openModal() { document.getElementById('qrModal').style.display = 'flex'; }
+  function closeModal() { document.getElementById('qrModal').style.display = 'none'; }
 </script>
 
 </body>

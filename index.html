@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dotorin | Global Collaboration Page</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+
   <style>
     :root{
       --bg:#f5f7fb;
@@ -14,21 +15,20 @@
       --sub:#6b7280;
       --accent:#2563eb;
       --line:#e5e7eb;
-
       --shadow: 0 14px 40px rgba(17,24,39,.08);
       --radius: 22px;
-      --radius2: 16px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
-  margin:0;
-  font-family:"Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-  background:var(--bg);
-  color:var(--text);
-}
+      margin:0;
+      font-family:"Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+      background:var(--bg);
+      color:var(--text);
+    }
     a{color:inherit;text-decoration:none}
     .wrap{max-width:1200px;margin:0 auto;padding:20px}
+
     header{
       background:#fff;
       border-bottom:1px solid var(--line);
@@ -38,9 +38,7 @@
     .nav{
       display:flex;align-items:center;justify-content:space-between;gap:16px;
     }
-    .brand{
-      display:flex;align-items:center;gap:10px;font-weight:900;
-    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
     .brand-dot{
       width:10px;height:10px;border-radius:999px;background:var(--accent);
       box-shadow:0 0 0 5px rgba(37,99,235,.10);
@@ -52,10 +50,9 @@
       flex-wrap:wrap;
       justify-content:center;
     }
-    .nav ul a{
-      padding:10px 10px;border-radius:12px;
-    }
+    .nav ul a{padding:10px 10px;border-radius:12px}
     .nav ul a:hover{background:#f3f4f6;color:#111827}
+
     .lang{
       display:flex;gap:8px;align-items:center;
       background:#fff;border:1px solid var(--line);
@@ -68,11 +65,15 @@
     }
     .lang button.active{background:var(--accent);color:#fff}
 
-    /* HERO */
+    /* sections */
     section{margin:60px 0}
+
+    /* HERO */
     .hero{
-      display:grid;grid-template-columns: 1.15fr .85fr;gap:24px;
-      align-items:stretch;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:24px;
+      align-items:start;
     }
     .badge{
       display:inline-flex;gap:8px;align-items:center;
@@ -87,21 +88,8 @@
       letter-spacing:-.02em;
     }
     .hero-sub{color:var(--sub);font-size:18px;line-height:1.6;margin:0 0 18px}
-    .stats{
-      display:grid;grid-template-columns: repeat(3, 1fr);
-      gap:12px;margin:18px 0 16px;
-    }
-    .stat{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      box-shadow:0 10px 26px rgba(17,24,39,.05);
-      min-height:86px;
-    }
-    .stat .big{font-size:24px;font-weight:950;margin-bottom:4px}
-    .stat .small{font-size:12px;color:var(--sub);font-weight:700}
-    .cta{
+
+    .hero-actions{
       display:flex;gap:12px;flex-wrap:wrap;align-items:center;
       margin-top:10px;
     }
@@ -112,14 +100,12 @@
       font-weight:900;cursor:pointer;border:1px solid var(--line);
       background:#fff;color:#111827;
       box-shadow:0 12px 30px rgba(17,24,39,.06);
-      transition:.15s transform ease, .15s opacity ease;
+      transition:.15s transform ease;
     }
     .btn:hover{transform:translateY(-1px)}
-    .btn.primary{
-      background:var(--accent);border-color:transparent;color:#fff;
-    }
-    .btn.primary:active{transform:translateY(0)}
+    .btn.primary{background:var(--accent);border-color:transparent;color:#fff}
     .btn.secondary{background:#fff}
+
     .note{
       margin-top:14px;
       padding:14px 16px;
@@ -129,10 +115,10 @@
       color:#92400e;
       font-size:14px;
       line-height:1.5;
-      display:none; /* CN에서만 */
+      display:none;
     }
 
-    /* RIGHT PROOF CARD */
+    /* Cards */
     .card{
       background:var(--card);
       border-radius:var(--radius);
@@ -140,122 +126,95 @@
       box-shadow:var(--shadow);
       border:1px solid rgba(229,231,235,.9);
     }
-    .proof-title{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
+
+    /* TOP PROOF */
+    .proof-card .title{
+      font-size:12px;
+      font-weight:950;
+      letter-spacing:.12em;
+      color:var(--sub);
       margin-bottom:12px;
     }
-    .proof-title h3{
-      margin:0;font-size:13px;letter-spacing:.18em;
-      color:#6b7280;font-weight:950;
-    }
+
     .proof-frame{
-      border:2px dashed #e5e7eb;
-      border-radius:18px;
-      aspect-ratio: 16/10;
+      width:100%;
+      aspect-ratio: 16 / 9;
+      border-radius:16px;
+      background:#f3f4f6;
+      border:2px dashed var(--line);
       overflow:hidden;
-      background: #f9fafb;
-      display:flex;align-items:center;justify-content:center;
       position:relative;
-    }
-    .proof-frame img{
-      width:100%;height:100%;object-fit:cover;display:block;
-    }
-    .proof-caption{
-      margin-top:12px;
-      color:var(--sub);
-      font-size:13px;
-      line-height:1.5;
-    }
-    .chips{
-      display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;
-    }
-    .chip{
-      font-size:12px;font-weight:800;color:#374151;
-      background:#f3f4f6;border:1px solid #e5e7eb;
-      padding:8px 10px;border-radius:999px;
-    }
-    .thumbs{
-      display:flex;gap:10px;margin-top:12px;
-      overflow:auto;padding-bottom:2px;
-    }
-    .thumb{
-      width:92px;flex:0 0 92px;aspect-ratio:16/10;
-      border-radius:12px;overflow:hidden;
-      border:2px solid transparent;
-      background:#eef2ff;
-      cursor:pointer;
-      position:relative;
-    }
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .thumb.active{border-color:var(--accent)}
-    .thumb::after{
-      content:"";position:absolute;inset:0;
-      background:linear-gradient(to top, rgba(0,0,0,.18), transparent 55%);
-      opacity:.25;
     }
 
-    /* SECTIONS */
-    h2{
-      font-size:28px;margin:0 0 14px;
-      letter-spacing:-.01em;
+    #proofSlider{
+      position:relative;
+      width:100%;
+      height:100%;
     }
+    #proofSlider img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0;
+      transition:opacity .45s ease;
+    }
+    #proofSlider img.active{opacity:1}
+
+    .proof-meta{
+      margin-top:14px;
+      color:var(--sub);
+      font-size:14px;
+      line-height:1.5;
+    }
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .tag{
+      font-size:12px;
+      font-weight:800;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#374151;
+    }
+
+    /* Other sections */
+    h2{font-size:28px;margin:0 0 14px;letter-spacing:-.01em}
     .section-sub{color:var(--sub);margin:0 0 18px;line-height:1.6}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 
-    /* PROFILE CARDS */
-    .profile{
-      display:flex;gap:18px;align-items:flex-start;
-    }
+    .profile{display:flex;gap:18px;align-items:flex-start}
     .photo{
       width:118px;aspect-ratio:3/4;
-      border-radius:14px;
-      background:#e5e7eb;
-      overflow:hidden;
-      display:flex;align-items:center;justify-content:center;
-      color:#9ca3af;font-weight:900;
-      border:1px solid #e5e7eb;
-      flex:0 0 auto;
+      border-radius:14px;background:#e5e7eb;
+      overflow:hidden;display:flex;align-items:center;justify-content:center;
+      color:#9ca3af;font-weight:900;border:1px solid #e5e7eb;flex:0 0 auto;
     }
     .photo img{width:100%;height:100%;object-fit:cover;display:block}
-    .label{
-      font-size:12px;font-weight:950;color:var(--accent);
-      letter-spacing:.08em;
-    }
+    .label{font-size:12px;font-weight:950;color:var(--accent);letter-spacing:.08em}
     .name{font-size:20px;font-weight:950;margin:6px 0 8px}
     .desc{color:var(--sub);line-height:1.55;margin:0 0 10px}
-    .meta{
-      display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;
-      color:#374151;font-weight:800;font-size:13px;
-    }
-    .meta span{
-      background:#f9fafb;border:1px solid #e5e7eb;
-      padding:8px 10px;border-radius:999px;
-    }
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;color:#374151;font-weight:800;font-size:13px}
+    .meta span{background:#f9fafb;border:1px solid #e5e7eb;padding:8px 10px;border-radius:999px}
 
-    /* LISTS */
     ul{margin:0;padding-left:18px}
     li{margin:8px 0;line-height:1.55}
 
-    /* REFERENCE BOX */
-    .ref-box{
-      display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
-    }
-    .ref-links{
-      display:flex;flex-direction:column;gap:10px;margin-top:10px;
-    }
-    .ref-links a{
-      font-weight:900;color:var(--accent);
-      display:inline-flex;align-items:center;gap:8px;
-    }
+    .ref-box{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+    .ref-links{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+    .ref-links a{font-weight:900;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
     .ref-links a:hover{text-decoration:underline}
     .mini-muted{color:var(--sub);font-size:13px;line-height:1.55;margin-top:8px}
 
-    /* CONTACT */
-    .contact-actions{
-      display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;
-    }
+    .contact-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 
-    /* MODAL */
+    /* Modal */
     .modal-backdrop{
       position:fixed;inset:0;background:rgba(17,24,39,.55);
       display:none;align-items:center;justify-content:center;
@@ -274,182 +233,19 @@
       font-weight:950;
     }
     .modal-body{padding:16px}
-    .qr{
-      width:100%;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#f3f4f6;
-      overflow:hidden;
-    }
+    .qr{width:100%;border-radius:14px;border:1px solid var(--line);background:#f3f4f6;overflow:hidden}
     .qr img{width:100%;height:auto;display:block}
-    .close{
-      border:0;background:#f3f4f6;
-      border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:900;
-    }
+    .close{border:0;background:#f3f4f6;border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:900}
 
     footer{margin:60px 0;color:var(--sub)}
-    /* ===== HERO 2칸 + TOP PROOF 슬라이더 (추가) ===== */
-.hero-grid{
-  display:grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap:24px;
-  align-items:start;
-}
-@media (max-width: 980px){
-  .hero-grid{ grid-template-columns:1fr; }
-}
-.badge{
-  display:inline-flex;
-  gap:8px;
-  padding:8px 12px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:#fff;
-  color:var(--sub);
-  font-weight:700;
-  font-size:13px;
-}
-.hero-actions{
-  display:flex;
-  gap:12px;
-  margin-top:16px;
-  flex-wrap:wrap;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:12px 16px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:#fff;
-  font-weight:800;
-  cursor:pointer;
-  text-decoration:none;
-  color:var(--text);
-}
-.btn.primary{
-  background:var(--accent);
-  color:#fff;
-  border-color:transparent;
-}
-.proof-card .title{
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.12em;
-  color:var(--sub);
-  margin-bottom:12px;
-}
-.proof-frame{
-  width:100%;
-  aspect-ratio: 16 / 9;
-  border-radius:16px;
-  background:#f3f4f6;
-  border:2px dashed var(--line);
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.slider{
-  width:100%;
-  height:100%;
-}
-.slider img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:none;
-}
-.slider img.active{ display:block; }
-.proof-meta{
-  margin-top:14px;
-  color:var(--sub);
-  font-size:14px;
-  line-height:1.5;
-}
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:10px;
-}
-.tag{
-  font-size:12px;
-  font-weight:800;
-  padding:8px 10px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:#fff;
-  color:#374151;
-}
 
-    /* RESPONSIVE */
+    /* responsive */
     @media (max-width: 980px){
       .hero{grid-template-columns:1fr;gap:16px}
       h1{font-size:38px}
-      .stats{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
-      .nav ul{display:none} /* 모바일에서는 메뉴 숨김(필요하면 햄버거로 확장 가능) */
+      .nav ul{display:none}
     }
-/* TOP PROOF 이미지 영역: 폰/PC 비율 통일 */
-.proof-stage{
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;   /* 이게 핵심: PC/폰 같은 느낌 */
-  border-radius: 14px;
-  overflow: hidden;
-  background: #f3f4f6;
-  border: 2px dashed #e5e7eb;
-}
-
-/* 이미지가 박스에 예쁘게 꽉 차게 */
-.proof-stage img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit: cover;
-  opacity:0;
-  transition: opacity .5s ease;
-}
-
-.proof-stage img.active{ opacity:1; }
-/* ===== HERO layout fix (PC/모바일 비율 통일) ===== */
-.hero{
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr; /* 좌:우 비율 */
-  gap: 24px;
-  align-items: start;
-}
-
-/* 큰 화면에서 너무 벌어지지 않게 */
-.wrap{ max-width: 1200px; margin: 0 auto; padding: 20px; }
-
-/* 모바일에서는 1열로 */
-@media (max-width: 980px){
-  .hero{ grid-template-columns: 1fr; }
-}
-
-/* TOP PROOF 이미지 영역 고정 */
-#proofSlider{
-  width: 100%;
-  aspect-ratio: 16 / 9;      /* 핵심: PC/폰 동일한 느낌 */
-  border-radius: 16px;
-  overflow: hidden;
-  background: #f3f4f6;
-}
-#proofSlider img{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity .45s ease;
-}
-#proofSlider img.active{ opacity: 1; }
-
   </style>
 </head>
 
@@ -481,84 +277,74 @@
 <main class="wrap">
 
   <!-- HERO + TOP PROOF -->
-  <section class="hero" id="top">
-     <!-- HERO -->
-  <section>
-    <div class="hero-grid">
-
-      <!-- LEFT -->
-      <div>
-        <div class="badge"
-             data-kr="Region-ready · Evidence-first · Mobile-friendly"
-             data-en="Region-ready · Evidence-first · Mobile-friendly"
-             data-cn="可跨地区 · 证据优先 · 适配移动端">
-          Region-ready · Evidence-first · Mobile-friendly
-        </div>
-
-        <h1
-  data-kr="트렌드를 선도하는 크리에이터 협업 페이지입니다."
-  data-en="A trend-leading creator collaboration page."
-  data-cn="引领趋势的创作者合作页面。"
->
-  트렌드를 선도하는 크리에이터 협업 페이지입니다.
-</h1>
-
-        <p class="hero-sub"
-           data-kr="감각이 아닌 수치와 증거 중심으로 설계했습니다."
-           data-en="Designed around metrics and proof, not impressions."
-           data-cn="以数据与验证材料为核心，而非主观感受。">
-          감각이 아닌 수치와 증거 중심으로 설계했습니다.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn primary" href="#contact"
-             data-kr="협업 문의하기"
-             data-en="Contact"
-             data-cn="合作咨询">협업 문의하기</a>
-
-          <a class="btn" href="#reference"
-             data-kr="레퍼런스 보기"
-             data-en="See references"
-             data-cn="查看资料">레퍼런스 보기</a>
-        </div>
-
-        <!-- CN only note -->
-        <div class="note" id="cnNote">
-          중국 본토 등 일부 지역에서는 YouTube 접근이 제한될 수 있어,<br>
-          본 페이지는 ‘재생’이 아닌 ‘증거(캡처/수치/요약)’ 중심으로 구성되었습니다.
-        </div>
+  <section class="hero" id="proof">
+    <!-- LEFT -->
+    <div>
+      <div class="badge"
+           data-kr="Region-ready · Evidence-first · Mobile-friendly"
+           data-en="Region-ready · Evidence-first · Mobile-friendly"
+           data-cn="可跨地区 · 证据优先 · 适配移动端">
+        Region-ready · Evidence-first · Mobile-friendly
       </div>
 
-      <!-- RIGHT -->
-      <div class="card proof-card">
-        <div class="title">TOP PROOF</div>
+      <h1
+        data-kr="트렌드를 선도하는 크리에이터 협업 페이지입니다."
+        data-en="A trend-leading creator collaboration page."
+        data-cn="引领趋势的创作者合作页面。">
+        트렌드를 선도하는 크리에이터 협업 페이지입니다.
+      </h1>
 
-        <div class="proof-frame">
-          <div class="slider" id="proofSlider">
-            <!-- ✅ 나중에 너가 캡쳐 이미지 올리면, 아래 src만 바꾸면 됨 -->
-            <img class="active" src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+1" alt="Top proof 1">
-            <img src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+2" alt="Top proof 2">
-            <img src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+3" alt="Top proof 3">
-          </div>
-        </div>
+      <p class="hero-sub"
+         data-kr="감각이 아닌 수치와 증거 중심으로 설계했습니다."
+         data-en="Designed around metrics and proof, not impressions."
+         data-cn="以数据与验证材料为核心，而非主观感受。">
+        감각이 아닌 수치와 증거 중심으로 설계했습니다.
+      </p>
 
-        <div class="proof-meta"
-             data-kr="콘텐츠: 대표 여행 Vlog (썸네일 캡쳐 넣기)"
-             data-en="Content: flagship travel vlog (add thumbnail captures)"
-             data-cn="内容：代表旅行Vlog（可放缩略图截图）">
-          콘텐츠: 대표 여행 Vlog (썸네일 캡쳐 넣기)
-        </div>
+      <div class="hero-actions">
+        <a class="btn primary" href="#contact"
+           data-kr="협업 문의하기"
+           data-en="Contact"
+           data-cn="合作咨询">협업 문의하기</a>
 
-        <div class="tags">
-          <span class="tag" data-kr="#성과요약" data-en="#metrics" data-cn="#数据汇总">#성과요약</span>
-          <span class="tag" data-kr="#캡처기반" data-en="#captures" data-cn="#截图证明">#캡처기반</span>
-          <span class="tag" data-kr="#내부공유" data-en="#internal" data-cn="#内部共享">#내부공유</span>
-        </div>
+        <a class="btn" href="#reference"
+           data-kr="레퍼런스 보기"
+           data-en="See references"
+           data-cn="查看资料">레퍼런스 보기</a>
       </div>
 
+      <div class="note" id="cnNote">
+        중국 본토 등 일부 지역에서는 YouTube 접근이 제한될 수 있어,<br>
+        본 페이지는 ‘재생’이 아닌 ‘증거(캡처/수치/요약)’ 중심으로 구성되었습니다.
+      </div>
     </div>
-  </section>
 
+    <!-- RIGHT -->
+    <div class="card proof-card">
+      <div class="title">TOP PROOF</div>
+
+      <div class="proof-frame">
+        <div id="proofSlider">
+          <img class="active" src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+1" alt="Top proof 1">
+          <img src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+2" alt="Top proof 2">
+          <img src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+3" alt="Top proof 3">
+        </div>
+      </div>
+
+      <div class="proof-meta"
+           data-kr="콘텐츠: 대표 여행 Vlog (썸네일 캡쳐 넣기)"
+           data-en="Content: flagship travel vlog (add thumbnail captures)"
+           data-cn="内容：代表旅行Vlog（可放缩略图截图）">
+        콘텐츠: 대표 여행 Vlog (썸네일 캡쳐 넣기)
+      </div>
+
+      <div class="tags">
+        <span class="tag" data-kr="#성과요약" data-en="#metrics" data-cn="#数据汇总">#성과요약</span>
+        <span class="tag" data-kr="#캡처기반" data-en="#captures" data-cn="#截图证明">#캡처기반</span>
+        <!-- 내부공유는 의미가 애매해서 더 명확한 말로 바꿔둠 -->
+        <span class="tag" data-kr="#보고용" data-en="#report-ready" data-cn="#可汇报">#보고용</span>
+      </div>
+    </div>
   </section>
 
   <!-- WHO -->
@@ -629,9 +415,6 @@
               <span data-kr="Rednote" data-en="Rednote" data-cn="小红书">Rednote</span>
               <span data-kr="트렌드 편집" data-en="Trend edit" data-cn="趋势剪辑">트렌드 편집</span>
             </div>
-
-            <div class="mini-muted" style="margin-top:10px;font-weight:900;color:#374151">
-            </div>
           </div>
         </div>
       </div>
@@ -696,12 +479,6 @@
             단발 노출이 아닌 재사용 가능한 자산
           </li>
         </ul>
-
-        <div class="chips" style="margin-top:14px">
-          <span class="chip" data-kr="#검토친화" data-en="#Review-friendly" data-cn="#便于审核">#검토친화</span>
-          <span class="chip" data-kr="#보고용" data-en="#Report-ready" data-cn="#可汇报">#보고용</span>
-          <span class="chip" data-kr="#재사용" data-en="#Reusable" data-cn="#可复用">#재사용</span>
-        </div>
       </div>
     </div>
   </section>
@@ -778,7 +555,6 @@
           </div>
 
           <div class="ref-links">
-            <!-- 링크는 너가 나중에 실제로 교체 -->
             <a href="https://youtu.be/REPLACE_DOTORIN" target="_blank" rel="noopener">
               <span data-kr="Dotorin YouTube 링크" data-en="Dotorin YouTube" data-cn="Dotorin YouTube">Dotorin YouTube 링크</span>
             </a>
@@ -786,19 +562,12 @@
               <span data-kr="Somyeong YouTube 링크" data-en="Somyeong YouTube" data-cn="Somyeong YouTube">Somyeong YouTube 링크</span>
             </a>
           </div>
-
-          <div class="mini-muted" style="margin-top:12px"
-               data-kr="아래 영역에 유튜브 애널리틱스 캡처(국가별/시청시간) 이미지도 넣을 수 있어요."
-               data-en="You can place analytics screenshots (by country/watch time) below."
-               data-cn="可在下方放置分析截图（国家/观看时长）。">
-            아래 영역에 유튜브 애널리틱스 캡처(국가별/시청시간) 이미지도 넣을 수 있어요.
-          </div>
         </div>
 
         <div style="width:340px;max-width:100%">
           <div class="proof-frame" style="aspect-ratio:16/10;border-style:solid;border-width:1px">
             <img src="assets/analytics-sample.jpg" alt="Analytics screenshot"
-                 onerror="this.style.display='none'; this.parentElement.style.background='#f3f4f6'; this.parentElement.innerHTML='<div style=&quot;color:#6b7280;font-weight:900&quot;>Analytics 캡처 넣기</div>';">
+                 onerror="this.style.display='none'; this.parentElement.style.background='#f3f4f6'; this.parentElement.innerHTML='<div style=&quot;color:#6b7280;font-weight:900;display:flex;align-items:center;justify-content:center;height:100%&quot;>Analytics 캡처 넣기</div>';">
           </div>
         </div>
       </div>
@@ -824,7 +593,6 @@
       </div>
 
       <div class="contact-actions">
-        <!-- 메일 주소 교체 -->
         <a class="btn primary" href="mailto:REPLACE_EMAIL@example.com"
            data-kr="Email 보내기" data-en="Send Email" data-cn="发送邮件">
           Email 보내기
@@ -847,9 +615,7 @@
 
 </main>
 
-<footer class="wrap">
-  © Dotorin
-</footer>
+<footer class="wrap">© Dotorin</footer>
 
 <!-- MODAL -->
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="WeChat QR">
@@ -872,12 +638,14 @@
     </div>
   </div>
 </div>
+
 <script>
-  // 새로고침 시 스크롤 위치 복원 방지
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-window.addEventListener('load', () => {
-  if (!location.hash) window.scrollTo(0, 0);
-});
+  // ✅ 새로고침 시 스크롤 복원 방지 + 해시 없으면 맨 위로
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('load', () => {
+    if (!location.hash) window.scrollTo(0, 0);
+  });
+
   // 언어: data-cn이 아직 없으면 en -> kr 순으로 fallback
   function getText(el, lang){
     if(!el || !el.dataset) return null;
@@ -900,19 +668,13 @@ window.addEventListener('load', () => {
     const btn = document.querySelector(`.lang button[data-lang="${lang}"]`);
     if(btn) btn.classList.add('active');
 
-    // CN note only
     const cnNote = document.getElementById('cnNote');
     if(cnNote) cnNote.style.display = (lang === 'cn') ? 'block' : 'none';
   }
 
-  
   // Modal
-  function openModal(){
-    document.getElementById('modalBackdrop').style.display = 'flex';
-  }
-  function closeModal(){
-    document.getElementById('modalBackdrop').style.display = 'none';
-  }
+  function openModal(){ document.getElementById('modalBackdrop').style.display = 'flex'; }
+  function closeModal(){ document.getElementById('modalBackdrop').style.display = 'none'; }
   document.getElementById('modalBackdrop').addEventListener('click', (e)=>{
     if(e.target.id === 'modalBackdrop') closeModal();
   });
@@ -922,22 +684,22 @@ window.addEventListener('load', () => {
 
   // init
   setLang('kr');
-// TOP PROOF auto image slider (사진만 자동 재생)
-(function(){
-  const slider = document.getElementById('proofSlider');
-  if(!slider) return;
 
-  const imgs = slider.querySelectorAll('img');
-  if(imgs.length <= 1) return;
+  // ✅ TOP PROOF 자동 슬라이드 (사진만)
+  (function(){
+    const slider = document.getElementById('proofSlider');
+    if(!slider) return;
 
-  let idx = 0;
-  setInterval(()=>{
-    imgs[idx].classList.remove('active');
-    idx = (idx + 1) % imgs.length;
-    imgs[idx].classList.add('active');
-  }, 2500);
-})();
+    const imgs = slider.querySelectorAll('img');
+    if(imgs.length <= 1) return;
 
+    let idx = 0;
+    setInterval(()=>{
+      imgs[idx].classList.remove('active');
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add('active');
+    }, 2500);
+  })();
 </script>
 </body>
 </html>

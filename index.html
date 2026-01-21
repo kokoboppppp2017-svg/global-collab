@@ -326,9 +326,11 @@
 
       <div class="proof-frame">
         <div id="proofSlider">
-          <img class="active" src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+1" alt="Top proof 1">
-          <img src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+2" alt="Top proof 2">
-          <img src="https://via.placeholder.com/1280x720.png?text=TOP+PROOF+3" alt="Top proof 3">
+          <img class="active" src="view_proof.jpg" alt="Views Proof" onerror="this.src='https://via.placeholder.com/800x450?text=No+Image'">
+          
+          <img src="analytics_proof.jpg" alt="Global Stats">
+          
+          <img src="subtitle_proof.jpg" alt="Subtitles">
         </div>
       </div>
 
@@ -643,3 +645,61 @@
   © 2026 Dotorin & Somyeong. All rights reserved.<br>
   Based in Korea, Creating Globally.
 </footer>
+<div class="modal-backdrop" id="qrModal" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <span>WeChat QR Code</span>
+      <button class="close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="qr">
+        <img src="wechat_qr.jpg" alt="WeChat QR" onerror="this.parentElement.innerHTML='QR 이미지를 준비중입니다.'">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 1. 슬라이드쇼 자동 재생 (3초마다 변경)
+  const slides = document.querySelectorAll('#proofSlider img');
+  let currentSlide = 0;
+
+  if(slides.length > 0) {
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active'); // 현재 거 끄고
+      currentSlide = (currentSlide + 1) % slides.length; // 다음 번호로 넘기기
+      slides[currentSlide].classList.add('active'); // 다음 거 켜기
+    }, 3000); // 3000ms = 3초
+  }
+
+  // 2. 언어 변경 기능 (KR / EN / CN)
+  function setLang(lang) {
+    // 버튼 색상 변경
+    document.querySelectorAll('.lang button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    // 텍스트 내용 변경
+    document.querySelectorAll('[data-kr]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if(text) el.innerHTML = text; // 태그 안의 내용 교체
+    });
+
+    // 중국어 선택 시 경고 문구(Note) 보이기
+    const cnNote = document.getElementById('cnNote');
+    if(cnNote) {
+      cnNote.style.display = (lang === 'cn') ? 'block' : 'none';
+    }
+  }
+
+  // 3. 모달창 열기/닫기
+  function openModal() {
+    document.getElementById('qrModal').style.display = 'flex';
+  }
+  function closeModal() {
+    document.getElementById('qrModal').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

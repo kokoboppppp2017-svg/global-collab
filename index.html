@@ -392,6 +392,30 @@
       .grid{grid-template-columns:1fr}
       .nav ul{display:none} /* 모바일에서는 메뉴 숨김(필요하면 햄버거로 확장 가능) */
     }
+/* TOP PROOF 이미지 영역: 폰/PC 비율 통일 */
+.proof-stage{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;   /* 이게 핵심: PC/폰 같은 느낌 */
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f3f4f6;
+  border: 2px dashed #e5e7eb;
+}
+
+/* 이미지가 박스에 예쁘게 꽉 차게 */
+.proof-stage img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  opacity:0;
+  transition: opacity .5s ease;
+}
+
+.proof-stage img.active{ opacity:1; }
+
   </style>
 </head>
 
@@ -841,35 +865,7 @@
     if(cnNote) cnNote.style.display = (lang === 'cn') ? 'block' : 'none';
   }
 
-  // TOP PROOF thumbnail switching
-  function setProof(el){
-    document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
-    el.classList.add('active');
-    const img = el.getAttribute('data-img');
-    const link = el.getAttribute('data-link');
-
-    const main = document.getElementById('proofMainImg');
-    const a = document.getElementById('proofLink');
-    if(main && img) { main.src = img; main.style.display='block'; }
-    if(a && link) a.href = link;
-  }
-
-  // auto slideshow (optional)
-  let slideTimer = null;
-  function startSlideshow(){
-    const thumbs = Array.from(document.querySelectorAll('.thumb'));
-    if(thumbs.length <= 1) return;
-    let idx = thumbs.findIndex(t=>t.classList.contains('active'));
-    if(idx < 0) idx = 0;
-    slideTimer = setInterval(()=>{
-      idx = (idx + 1) % thumbs.length;
-      setProof(thumbs[idx]);
-    }, 4500);
-  }
-  function stopSlideshow(){
-    if(slideTimer) clearInterval(slideTimer);
-  }
-
+  
   // Modal
   function openModal(){
     document.getElementById('modalBackdrop').style.display = 'flex';
@@ -886,9 +882,22 @@
 
   // init
   setLang('kr');
-  startSlideshow();
-  startSlideshow();
-setLang('kr');
+// TOP PROOF auto image slider (사진만 자동 재생)
+(function(){
+  const slider = document.getElementById('proofSlider');
+  if(!slider) return;
+
+  const imgs = slider.querySelectorAll('img');
+  if(imgs.length <= 1) return;
+
+  let idx = 0;
+  setInterval(()=>{
+    imgs[idx].classList.remove('active');
+    idx = (idx + 1) % imgs.length;
+    imgs[idx].classList.add('active');
+  }, 2500);
+})();
+
 </script>
 </body>
 </html>

@@ -285,9 +285,9 @@
     </ul>
 
     <div class="lang" aria-label="Language switch">
-      <button class="active" data-lang="kr" onclick="setLang('kr')">KR</button>
+      <button class="active" data-lang="cn" onclick="setLang('cn')">CN</button>
+      <button data-lang="kr" onclick="setLang('kr')">KR</button>
       <button data-lang="en" onclick="setLang('en')">EN</button>
-      <button data-lang="cn" onclick="setLang('cn')">CN</button>
     </div>
   </div>
 </header>
@@ -775,6 +775,7 @@
       refSlides[currentRefSlide].classList.add('active');
     }, 3000);
   }
+setLang('cn'); // 사이트 열자마자 중국어 모드로 시작
 </script>
 
 </body>

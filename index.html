@@ -246,6 +246,24 @@
       .grid{grid-template-columns:1fr}
       .nav ul{display:none}
     }
+/* 레퍼런스 슬라이드 스타일 */
+#refSlider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#refSlider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+#refSlider img.active {
+  opacity: 1;
+}
   </style>
 </head>
 
@@ -552,7 +570,10 @@
       <div class="card" style="padding:15px;">
         <div style="font-weight:950; margin-bottom:10px; font-size:15px;">📊 Global Audience</div>
         <div class="proof-frame">
-          <img src="analytics_proof.jpg" alt="Analytics" 
+          <div id="refSlider">
+  <img class="active" src="analytics_proof.jpg" alt="통계">
+  <img src="subtitle_proof.jpg" alt="자막">
+</div>
                style="width:100%; height:100%; object-fit:contain; background:white;">
         </div>
         <div class="mini-muted" style="margin-top:10px;">
@@ -698,6 +719,17 @@
   }
   function closeModal() {
     document.getElementById('qrModal').style.display = 'none';
+  }
+  // 레퍼런스 슬라이드 자동 재생 (3초)
+  const refSlides = document.querySelectorAll('#refSlider img');
+  let currentRefSlide = 0;
+
+  if(refSlides.length > 0) {
+    setInterval(() => {
+      refSlides[currentRefSlide].classList.remove('active');
+      currentRefSlide = (currentRefSlide + 1) % refSlides.length;
+      refSlides[currentRefSlide].classList.add('active');
+    }, 3000);
   }
 </script>
 
